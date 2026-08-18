@@ -1,0 +1,3 @@
+TOOL_CHOICE = "auto"
+HTTP_CLIENT = None
+DEFAULT_HEADERS = None

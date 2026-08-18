@@ -4,7 +4,7 @@ import logging
 from threading import Event, Lock
 from typing import Optional
 import os
-from fluid.generation.openai import OpenAI
+from openai import OpenAI
 from fluid.utill import generate_buffer_id, _build_logger
 
 LOG_DIR = "logs"

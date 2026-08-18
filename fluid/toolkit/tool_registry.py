@@ -55,7 +55,7 @@ EXCLUDED_DIRS = {
     ".venv", "venv", "env", ".env",
     "__pycache__", ".git", ".hg", ".svn",
     "node_modules", "site-packages",
-    "build", "dist", ".mypy_cache", ".pytest_cache", ".tox",
+    "build", "dist", ".mypy_cache", ".pytest_cache", ".tox", "agent"
 }
 
 

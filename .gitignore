@@ -45,4 +45,4 @@ venv.bak/
 *.swo
 
 # Project specific
-z_ignores/
+z_ignore/

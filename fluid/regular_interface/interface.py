@@ -1202,14 +1202,14 @@ class RegularInterface:
         return f"Process {pid} terminated."
 
     def _debug_agent(self):
-        # print("*" * 20, "messages", "*" * 20)
-        # print(json.dumps(self.messages, indent=4, default=json_ser))
+        print("*" * 20, "messages", "*" * 20)
+        print(json.dumps(self.messages, indent=4, default=json_ser))
 
-        # print("*" * 20, "default skills", "*" * 20)
-        # print(json.dumps(self.default_skills, indent=4, default=json_ser))
+        print("*" * 20, "default skills", "*" * 20)
+        print(json.dumps(self.default_skills, indent=4, default=json_ser))
 
-        # print("*" * 20, "non default skills", "*" * 20)
-        # print(json.dumps(self.non_default_skills, indent=4, default=json_ser))
+        print("*" * 20, "non default skills", "*" * 20)
+        print(json.dumps(self.non_default_skills, indent=4, default=json_ser))
 
         print("*" * 20, "raw contexts", "*" * 20)
         print(json.dumps(self.raw_contexts, indent=4, default=json_ser))
@@ -1217,23 +1217,23 @@ class RegularInterface:
         print("*" * 20, "grouped contexts (with templates)", "*" * 20)
         print(json.dumps(self.contexts, indent=4, default=json_ser))
 
-        # print("*" * 20, "off tools", "*" * 20)
-        # print(json.dumps(self.off_tools, indent=4, default=json_ser))
+        print("*" * 20, "off tools", "*" * 20)
+        print(json.dumps(self.off_tools, indent=4, default=json_ser))
 
-        # print("*" * 20, "on tools", "*" * 20)
-        # print(json.dumps(self.on_tools, indent=4, default=json_ser))
+        print("*" * 20, "on tools", "*" * 20)
+        print(json.dumps(self.on_tools, indent=4, default=json_ser))
 
-        # print("*" * 20, "non default skills and their tools sys m", "*" * 20)
-        # print(self.n_ds_and_ot_sys_m)
+        print("*" * 20, "non default skills and their tools sys m", "*" * 20)
+        print(self.n_ds_and_ot_sys_m)
 
-        # print("*" * 20, "default skills and contexts sys m", "*" * 20)
-        # print(self.ds_and_c_sys_m)
+        print("*" * 20, "default skills and contexts sys m", "*" * 20)
+        print(self.ds_and_c_sys_m)
 
-        # print("*" * 20, "agent tools", "*" * 20)
-        # print(json.dumps(self.agent_tools, indent=4, default=json_ser))
+        print("*" * 20, "agent tools", "*" * 20)
+        print(json.dumps(self.agent_tools, indent=4, default=json_ser))
 
-        # print("*" * 20, "agent skills", "*" * 20)
-        # print(json.dumps(self.agent_skills, indent=4, default=json_ser))
+        print("*" * 20, "agent skills", "*" * 20)
+        print(json.dumps(self.agent_skills, indent=4, default=json_ser))
 
         print("*" * 20, "relevent messages", "*" * 20)
         print(json.dumps(self.relevent_messages, indent=4, default=json_ser))

@@ -83,7 +83,7 @@ class SRCF:
             ),  # to get all the results and get filtered using threshold
         )
 
-        print(json.dumps(results, indent=4))
+        # print(json.dumps(results, indent=4))
 
         _results_groups = []
 
@@ -105,7 +105,7 @@ class SRCF:
                     }
 
         _results_groups = sorted(_results_groups.values(), key=lambda x: x["index"])
-        print(json.dumps(_results_groups, indent=4))
+        # print(json.dumps(_results_groups, indent=4))
 
         relevant_messages = []
 
@@ -114,11 +114,11 @@ class SRCF:
                 continue
             relevant_messages.extend(group["group"])
 
-        print(json.dumps(relevant_messages, indent=4))
+        # print(json.dumps(relevant_messages, indent=4))
 
-        print(len(messages))
-        print(len(relevant_messages))
-        print(len(last_m))
+        # print(len(messages))
+        # print(len(relevant_messages))
+        # print(len(last_m))
 
         leftover_messages=[]
         for item in last_m:
