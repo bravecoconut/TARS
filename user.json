@@ -1,0 +1,31 @@
+{
+    "name": "no-name-provider",
+    "private_key_h": "you are a helpfull assistant, alway be clear.",
+    "instructions_for_tars": null,
+    "avail_tones": {
+        "clear": {
+            "temp": 1,
+            "path": "tones/clear.md"
+        },
+        "robotic": {
+            "temp": 1,
+            "path": "tones/robotic.md"
+        },
+        "sarcastic": {
+            "temp": 1,
+            "path": "tones/sarcastic.md"
+        },
+        "emotional": {
+            "temp": 1,
+            "path": "tones/emotional.md"
+        }
+    },
+    "curr_tone": "robotic",
+    "memory": true,
+    "memories": "",
+    "base_url": "https://api.openai.com/v1",
+    "api_key": null,
+    "model":null,
+    "srcf_on_length": 50,
+    "max_agent_turns": 200
+}
