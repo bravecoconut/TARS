@@ -22,7 +22,7 @@
     },
     "curr_tone": "robotic",
     "memory": true,
-    "memories": "",
+    "memory_path": "memory/memory.md",
     "base_url": "https://api.openai.com/v1",
     "api_key": null,
     "model":null,
