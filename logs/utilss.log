@@ -1343,3 +1343,436 @@ openai.APITimeoutError: Request timed out.
 2026-08-24 18:31:20,398 [INFO] MainProcess: [chat] DONE buffer_id=s5BC19vT chunks=75
 2026-08-24 18:31:20,400 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=64 tool_calls=0
 2026-08-24 18:31:20,401 [INFO] MainProcess: run_agent: model finished at turn 1
+2026-08-25 00:18:26,532 [INFO] MainProcess: retriving_pool START query='what is my favorite color?' locations_count=1 processes=None
+2026-08-25 00:18:26,550 [WARNING] MainProcess: Skipping location #0 ('OS') due to config error: location 'OS' must have a non-empty 'collections' list
+2026-08-25 00:18:26,576 [WARNING] MainProcess: retriving_pool: no valid tasks were built -- returning empty results.
+2026-08-25 00:18:31,580 [INFO] MainProcess: run_agent: starting | model='qwen3:14b' max_turns=50 tools=10 skills=1
+2026-08-25 00:18:31,581 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 00:18:31,582 [INFO] MainProcess: [chat] START buffer_id=eCr0AljJ model='qwen3:14b' base_url='https://microphone-enzyme-secretary-among.trycloudflare.com/v1'
+2026-08-25 00:19:29,252 [ERROR] MainProcess: [chat] FAILED buffer_id=eCr0AljJ after 0 chunk(s): Request timed out.
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 98, in map_httpcore_exceptions
+    yield
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 245, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/connection_pool.py", line 242, in handle_request
+    raise exc from None
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/connection_pool.py", line 224, in handle_request
+    response = connection.handle_request(pool_request.request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/connection.py", line 96, in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/http11.py", line 125, in handle_request
+    raise exc
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/http11.py", line 97, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/http11.py", line 167, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/http11.py", line 200, in _receive_event
+    data = self._network_stream.read(self.READ_NUM_BYTES, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_backends/sync.py", line 125, in read
+    with map_exceptions(exc_map):
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_exceptions.py", line 17, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore2.ReadTimeout: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1087, in request
+    response = self._send_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_client.py", line 553, in _send_request
+    response = self._send_with_auth_retry(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_client.py", line 532, in _send_with_auth_retry
+    response = super()._send_request(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1010, in _send_request
+    return self._client.send(request, stream=stream, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 987, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1015, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1050, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1083, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 244, in handle_request
+    with map_httpcore_exceptions():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 115, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx2.ReadTimeout: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/generation/openai.py", line 240, in _stream_chat
+    stream = client.chat.completions.create(**create_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_utils/_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 1296, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1382, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1105, in request
+    raise APITimeoutError(request=request) from err
+openai.APITimeoutError: Request timed out.
+2026-08-25 00:19:29,434 [ERROR] MainProcess: run_agent: stream error at turn 1: Request timed out.
+2026-08-25 00:19:44,664 [INFO] MainProcess: retriving_pool START query='what is my favorite color?' locations_count=1 processes=None
+2026-08-25 00:19:44,665 [WARNING] MainProcess: Skipping location #0 ('OS') due to config error: location 'OS' must have a non-empty 'collections' list
+2026-08-25 00:19:44,665 [WARNING] MainProcess: retriving_pool: no valid tasks were built -- returning empty results.
+2026-08-25 00:19:49,668 [INFO] MainProcess: run_agent: starting | model='qwen3:14b' max_turns=50 tools=10 skills=1
+2026-08-25 00:19:49,669 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 00:19:49,670 [INFO] MainProcess: [chat] START buffer_id=8GlcsyQt model='qwen3:14b' base_url='https://microphone-enzyme-secretary-among.trycloudflare.com/v1'
+2026-08-25 00:20:39,687 [ERROR] MainProcess: [chat] FAILED buffer_id=8GlcsyQt after 0 chunk(s): Request timed out.
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 98, in map_httpcore_exceptions
+    yield
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 245, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/connection_pool.py", line 242, in handle_request
+    raise exc from None
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/connection_pool.py", line 224, in handle_request
+    response = connection.handle_request(pool_request.request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/connection.py", line 96, in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/http11.py", line 125, in handle_request
+    raise exc
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/http11.py", line 97, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/http11.py", line 167, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_sync/http11.py", line 200, in _receive_event
+    data = self._network_stream.read(self.READ_NUM_BYTES, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_backends/sync.py", line 125, in read
+    with map_exceptions(exc_map):
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpcore2/_exceptions.py", line 17, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore2.ReadTimeout: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1087, in request
+    response = self._send_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_client.py", line 553, in _send_request
+    response = self._send_with_auth_retry(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_client.py", line 532, in _send_with_auth_retry
+    response = super()._send_request(request, stream=stream, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1010, in _send_request
+    return self._client.send(request, stream=stream, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 987, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1015, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1050, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1083, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 244, in handle_request
+    with map_httpcore_exceptions():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 115, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx2.ReadTimeout: The read operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/generation/openai.py", line 240, in _stream_chat
+    stream = client.chat.completions.create(**create_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_utils/_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 1296, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1382, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1105, in request
+    raise APITimeoutError(request=request) from err
+openai.APITimeoutError: Request timed out.
+2026-08-25 00:20:39,711 [ERROR] MainProcess: run_agent: stream error at turn 1: Request timed out.
+2026-08-25 00:20:49,097 [INFO] MainProcess: retriving_pool START query='what is my favorite color?' locations_count=1 processes=None
+2026-08-25 00:20:49,102 [WARNING] MainProcess: Skipping location #0 ('OS') due to config error: location 'OS' must have a non-empty 'collections' list
+2026-08-25 00:20:49,106 [WARNING] MainProcess: retriving_pool: no valid tasks were built -- returning empty results.
+2026-08-25 00:20:54,109 [INFO] MainProcess: run_agent: starting | model='qwen3:14b' max_turns=50 tools=10 skills=1
+2026-08-25 00:20:54,109 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 00:20:54,110 [INFO] MainProcess: [chat] START buffer_id=9XVLMdLV model='qwen3:14b' base_url='https://microphone-enzyme-secretary-among.trycloudflare.com/v1'
+2026-08-25 00:22:48,074 [INFO] MainProcess: [chat] DONE buffer_id=9XVLMdLV chunks=313
+2026-08-25 00:22:48,075 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=39 tool_calls=0
+2026-08-25 00:22:48,077 [INFO] MainProcess: run_agent: model finished at turn 1
+2026-08-25 00:25:59,941 [INFO] MainProcess: retriving_pool START query="analise '/home/loki/Documents/pride_and_prejudice.txt' file using you tools from line 114 to 168. and also get information by reading its top content" locations_count=1 processes=None
+2026-08-25 00:25:59,986 [WARNING] MainProcess: Skipping location #0 ('OS') due to config error: location 'OS' must have a non-empty 'collections' list
+2026-08-25 00:25:59,987 [WARNING] MainProcess: retriving_pool: no valid tasks were built -- returning empty results.
+2026-08-25 00:26:04,989 [INFO] MainProcess: run_agent: starting | model='qwen3:14b' max_turns=50 tools=10 skills=1
+2026-08-25 00:26:04,990 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 00:26:04,990 [INFO] MainProcess: [chat] START buffer_id=0iiipOtk model='qwen3:14b' base_url='https://microphone-enzyme-secretary-among.trycloudflare.com/v1'
+2026-08-25 00:26:57,424 [INFO] MainProcess: retriving_pool START query="analise '/home/loki/Documents/pride_and_prejudice.txt' file using you tools from line 114 to 168. and also get information by reading its top content" locations_count=1 processes=None
+2026-08-25 00:26:57,425 [WARNING] MainProcess: Skipping location #0 ('OS') due to config error: location 'OS' must have a non-empty 'collections' list
+2026-08-25 00:26:57,425 [WARNING] MainProcess: retriving_pool: no valid tasks were built -- returning empty results.
+2026-08-25 00:27:02,427 [INFO] MainProcess: run_agent: starting | model='qwen3:14b' max_turns=50 tools=11 skills=1
+2026-08-25 00:27:02,428 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 00:27:02,429 [INFO] MainProcess: [chat] START buffer_id=cc9e4to4 model='qwen3:14b' base_url='https://microphone-enzyme-secretary-among.trycloudflare.com/v1'
+2026-08-25 00:27:46,963 [INFO] MainProcess: [chat] DONE buffer_id=cc9e4to4 chunks=788
+2026-08-25 00:27:46,965 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='tool_calls' content_len=0 tool_calls=2
+2026-08-25 00:27:46,966 [INFO] MainProcess: run_agent: turn 1 has 2 tool call(s): ['analyise_file', 'analyise_file']
+2026-08-25 00:27:46,967 [INFO] MainProcess: run_agent: spawning external tool 'analyise_file' (id=call_vqgcfjcd) | timeout=30s args={'start_line': 114, 'end_line': 168, 'path': '/home/loki/Documents/pride_and_prejudice.txt'}
+2026-08-25 00:27:47,221 [INFO] MainProcess: run_agent: worker process started for 'analyise_file' (worker_pid=14079)
+2026-08-25 00:27:48,272 [INFO] MainProcess: run_agent: tool 'analyise_file' finished | output_len=3591
+2026-08-25 00:27:48,273 [INFO] MainProcess: run_agent: spawning external tool 'analyise_file' (id=call_bjh4cpxf) | timeout=30s args={'path': '/home/loki/Documents/pride_and_prejudice.txt', 'start_line': 1, 'end_line': 10}
+2026-08-25 00:27:48,298 [INFO] MainProcess: run_agent: worker process started for 'analyise_file' (worker_pid=14103)
+2026-08-25 00:27:49,364 [INFO] MainProcess: run_agent: tool 'analyise_file' finished | output_len=183
+2026-08-25 00:27:49,365 [INFO] MainProcess: run_agent: turn 2/50 | messages=11
+2026-08-25 00:27:49,366 [INFO] MainProcess: [chat] START buffer_id=WIQ8UeEp model='qwen3:14b' base_url='https://microphone-enzyme-secretary-among.trycloudflare.com/v1'
+2026-08-25 00:28:13,704 [INFO] MainProcess: [chat] DONE buffer_id=WIQ8UeEp chunks=466
+2026-08-25 00:28:13,706 [INFO] MainProcess: run_agent: turn 2 stream done | finish_reason='stop' content_len=750 tool_calls=0
+2026-08-25 00:28:13,707 [INFO] MainProcess: run_agent: model finished at turn 2
+2026-08-25 00:58:10,293 [INFO] MainProcess: retriving_pool START query="Complete these steps in order:\n1. First, activate the 'OS' skill using add_new_skill.\n2. Download the file from this URL: https://archive.org/download/vintage-cocktail-books-euvs/Bariana%20by%20Louis%20Fouquet%20%281896%29.txt and save it to /home/loki/Documents/bariana.txt\n3. Read the first part of the downloaded file.\n4. Write a short summary (3-5 sentences) of the content and save it to /home/loki/Documents/summary.txt\n5. Zip the /home/loki/Documents directory and save the zip file to /home/loki/Documents/archive.zip\n\nExecute each step and report the results." locations_count=1 processes=None
+2026-08-25 00:58:10,314 [WARNING] MainProcess: Skipping location #0 ('OS') due to config error: location 'OS' must have a non-empty 'collections' list
+2026-08-25 00:58:10,341 [WARNING] MainProcess: retriving_pool: no valid tasks were built -- returning empty results.
+2026-08-25 00:58:15,344 [INFO] MainProcess: run_agent: starting | model='qwen3:14b' max_turns=50 tools=11 skills=1
+2026-08-25 00:58:15,344 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 00:58:15,345 [INFO] MainProcess: [chat] START buffer_id=t3YN8wiD model='qwen3:14b' base_url='https://nothing-earl-climbing-barbie.trycloudflare.com/v1'
+2026-08-25 00:58:27,172 [ERROR] MainProcess: [chat] FAILED buffer_id=t3YN8wiD after 0 chunk(s): Error code: 404 - {'error': {'message': "model 'qwen3:14b' not found", 'type': 'not_found_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/generation/openai.py", line 240, in _stream_chat
+    stream = client.chat.completions.create(**create_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_utils/_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 1296, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1382, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1155, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.NotFoundError: Error code: 404 - {'error': {'message': "model 'qwen3:14b' not found", 'type': 'not_found_error', 'param': None, 'code': None}}
+2026-08-25 00:58:27,231 [ERROR] MainProcess: run_agent: stream error at turn 1: Error code: 404 - {'error': {'message': "model 'qwen3:14b' not found", 'type': 'not_found_error', 'param': None, 'code': None}}
+2026-08-25 01:00:38,778 [INFO] MainProcess: retriving_pool START query="Complete these steps in order:\n1. First, activate the 'OS' skill using add_new_skill.\n2. Download the file from this URL: https://archive.org/download/vintage-cocktail-books-euvs/Bariana%20by%20Louis%20Fouquet%20%281896%29.txt and save it to /home/loki/Documents/bariana.txt\n3. Read the first part of the downloaded file.\n4. Write a short summary (3-5 sentences) of the content and save it to /home/loki/Documents/summary.txt\n5. Zip the /home/loki/Documents directory and save the zip file to /home/loki/Documents/archive.zip\n\nExecute each step and report the results." locations_count=1 processes=None
+2026-08-25 01:00:38,778 [WARNING] MainProcess: Skipping location #0 ('OS') due to config error: location 'OS' must have a non-empty 'collections' list
+2026-08-25 01:00:38,779 [WARNING] MainProcess: retriving_pool: no valid tasks were built -- returning empty results.
+2026-08-25 01:00:43,781 [INFO] MainProcess: run_agent: starting | model='qwen3-vl:8b' max_turns=50 tools=11 skills=1
+2026-08-25 01:00:43,782 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 01:00:43,783 [INFO] MainProcess: [chat] START buffer_id=n0JNN08R model='qwen3-vl:8b' base_url='https://nothing-earl-climbing-barbie.trycloudflare.com/v1'
+2026-08-25 01:02:11,642 [INFO] MainProcess: [chat] DONE buffer_id=n0JNN08R chunks=33
+2026-08-25 01:02:11,643 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=0 tool_calls=0
+2026-08-25 01:02:11,644 [INFO] MainProcess: run_agent: model finished at turn 1
+2026-08-25 01:06:01,099 [INFO] MainProcess: retriving_pool START query="Complete these steps in order:\n1. First, activate the 'OS' skill using add_new_skill.\n2. Download the file from this URL: https://archive.org/download/vintage-cocktail-books-euvs/Bariana%20by%20Louis%20Fouquet%20%281896%29.txt and save it to /home/loki/Documents/bariana.txt\n3. Read the first part of the downloaded file.\n4. Write a short summary (3-5 sentences) of the content and save it to /home/loki/Documents/summary.txt\n5. Zip the /home/loki/Documents directory and save the zip file to /home/loki/Documents/archive.zip\n\nExecute each step and report the results." locations_count=1 processes=None
+2026-08-25 01:06:01,159 [WARNING] MainProcess: Skipping location #0 ('OS') due to config error: location 'OS' must have a non-empty 'collections' list
+2026-08-25 01:06:01,160 [WARNING] MainProcess: retriving_pool: no valid tasks were built -- returning empty results.
+2026-08-25 01:06:06,163 [INFO] MainProcess: run_agent: starting | model='qwen3:14b' max_turns=50 tools=11 skills=1
+2026-08-25 01:06:06,164 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 01:06:06,166 [INFO] MainProcess: [chat] START buffer_id=BW2gZ1lP model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:07:54,120 [INFO] MainProcess: [chat] DONE buffer_id=BW2gZ1lP chunks=122
+2026-08-25 01:07:54,132 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='tool_calls' content_len=0 tool_calls=1
+2026-08-25 01:07:54,133 [INFO] MainProcess: run_agent: turn 1 has 1 tool call(s): ['add_new_skill']
+2026-08-25 01:07:54,134 [INFO] MainProcess: run_agent: executing inline tool 'add_new_skill' (id=call_xvd6hl6x)
+2026-08-25 01:07:54,135 [INFO] MainProcess: _handle_inline_tool: dispatching 'add_new_skill' with args={'skill_name': 'OS'}
+2026-08-25 01:07:54,136 [INFO] MainProcess: run_agent: inline tool 'add_new_skill' done | result='OS' is a default skill -- you already have permanent access to it and its tools. No action needed.
+2026-08-25 01:07:54,138 [INFO] MainProcess: run_agent: rebuilt tool list after 'add_new_skill' | total_tools=11
+2026-08-25 01:07:54,139 [INFO] MainProcess: run_agent: turn 2/50 | messages=10
+2026-08-25 01:07:54,140 [INFO] MainProcess: [chat] START buffer_id=lu2VMT68 model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:08:32,001 [INFO] MainProcess: [chat] DONE buffer_id=lu2VMT68 chunks=732
+2026-08-25 01:08:32,003 [INFO] MainProcess: run_agent: turn 2 stream done | finish_reason='tool_calls' content_len=0 tool_calls=1
+2026-08-25 01:08:32,005 [INFO] MainProcess: run_agent: turn 2 has 1 tool call(s): ['download_file']
+2026-08-25 01:08:32,006 [INFO] MainProcess: run_agent: spawning external tool 'download_file' (id=call_hibkrfmn) | timeout=30s args={'url': 'https://archive.org/download/vintage-cocktail-books-euvs/Bariana%20by%20Louis%20Fouquet%20%281896%29.txt', 'dest': '/home/loki/Documents/bariana.txt', 'overwrite': False, 'timeout': 30}
+2026-08-25 01:08:32,111 [INFO] MainProcess: run_agent: worker process started for 'download_file' (worker_pid=17890)
+2026-08-25 01:08:37,221 [INFO] MainProcess: run_agent: tool 'download_file' finished | output_len=33
+2026-08-25 01:08:37,222 [INFO] MainProcess: run_agent: turn 3/50 | messages=12
+2026-08-25 01:08:37,223 [INFO] MainProcess: [chat] START buffer_id=Le8BJL2i model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:08:55,224 [INFO] MainProcess: [chat] DONE buffer_id=Le8BJL2i chunks=329
+2026-08-25 01:08:55,226 [INFO] MainProcess: run_agent: turn 3 stream done | finish_reason='tool_calls' content_len=0 tool_calls=1
+2026-08-25 01:08:55,227 [INFO] MainProcess: run_agent: turn 3 has 1 tool call(s): ['analyise_file']
+2026-08-25 01:08:55,228 [INFO] MainProcess: run_agent: spawning external tool 'analyise_file' (id=call_0xxg9p6y) | timeout=30s args={'end_line': 10, 'path': '/home/loki/Documents/bariana.txt', 'start_line': 1}
+2026-08-25 01:08:55,294 [INFO] MainProcess: run_agent: worker process started for 'analyise_file' (worker_pid=18068)
+2026-08-25 01:08:56,376 [INFO] MainProcess: run_agent: tool 'analyise_file' finished | output_len=893
+2026-08-25 01:08:56,408 [INFO] MainProcess: run_agent: turn 4/50 | messages=14
+2026-08-25 01:08:56,409 [INFO] MainProcess: [chat] START buffer_id=QV445bzD model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:09:13,860 [INFO] MainProcess: [chat] DONE buffer_id=QV445bzD chunks=229
+2026-08-25 01:09:13,862 [INFO] MainProcess: run_agent: turn 4 stream done | finish_reason='tool_calls' content_len=0 tool_calls=1
+2026-08-25 01:09:13,863 [INFO] MainProcess: run_agent: turn 4 has 1 tool call(s): ['write_text_file']
+2026-08-25 01:09:13,864 [INFO] MainProcess: run_agent: spawning external tool 'write_text_file' (id=call_xo59ovsu) | timeout=30s args={'overwrite': True, 'path': '/home/loki/Documents/summary.txt', 'content': 'Bariana by Louis Fouquet (1896) is one of the earliest French cocktail books, published in 1896. Written by Louis Fouquet, a renowned Parisian bartender, it includes both American/British cocktail recipes and unique French creations. The book features illustrations of sophisticated barware from the late 19th century and references the impact of phylloxera on French wine culture. It was reprinted in 1902.'}
+2026-08-25 01:09:13,945 [INFO] MainProcess: run_agent: worker process started for 'write_text_file' (worker_pid=18155)
+2026-08-25 01:09:15,028 [INFO] MainProcess: run_agent: tool 'write_text_file' finished | output_len=54
+2026-08-25 01:09:15,029 [INFO] MainProcess: run_agent: turn 5/50 | messages=16
+2026-08-25 01:09:15,029 [INFO] MainProcess: [chat] START buffer_id=u4eZNJKH model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:09:24,295 [INFO] MainProcess: [chat] DONE buffer_id=u4eZNJKH chunks=143
+2026-08-25 01:09:24,297 [INFO] MainProcess: run_agent: turn 5 stream done | finish_reason='tool_calls' content_len=0 tool_calls=1
+2026-08-25 01:09:24,299 [INFO] MainProcess: run_agent: turn 5 has 1 tool call(s): ['zip_directory']
+2026-08-25 01:09:24,300 [INFO] MainProcess: run_agent: spawning external tool 'zip_directory' (id=call_itfnpfay) | timeout=30s args={'source_dir': '/home/loki/Documents', 'output_path': '/home/loki/Documents/archive.zip', 'overwrite': True}
+2026-08-25 01:09:24,370 [INFO] MainProcess: run_agent: worker process started for 'zip_directory' (worker_pid=18235)
+2026-08-25 01:09:54,393 [INFO] MainProcess: run_agent: timeout hit for 'zip_directory' (pid=18240), requesting decision
+2026-08-25 01:09:54,395 [INFO] MainProcess: _ask_timeout_decision: starting for tool 'zip_directory' (id=call_itfnpfay, pid=18240)
+2026-08-25 01:09:54,396 [INFO] MainProcess: _ask_timeout_decision: attempt 1/3 for 'zip_directory'
+2026-08-25 01:09:54,397 [INFO] MainProcess: [chat] START buffer_id=ciyGycAl model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:10:12,825 [INFO] MainProcess: _ask_timeout_decision: got decision=15 on attempt 1
+2026-08-25 01:10:12,826 [INFO] MainProcess: run_agent: timeout decision for 'zip_directory': 15
+2026-08-25 01:10:27,830 [INFO] MainProcess: run_agent: timeout hit for 'zip_directory' (pid=18240), requesting decision
+2026-08-25 01:10:27,831 [INFO] MainProcess: _ask_timeout_decision: starting for tool 'zip_directory' (id=call_itfnpfay, pid=18240)
+2026-08-25 01:10:27,831 [INFO] MainProcess: _ask_timeout_decision: attempt 1/3 for 'zip_directory'
+2026-08-25 01:10:27,832 [INFO] MainProcess: [chat] START buffer_id=8sSkKToB model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:10:36,466 [INFO] MainProcess: _ask_timeout_decision: got decision=15 on attempt 1
+2026-08-25 01:10:36,485 [INFO] MainProcess: run_agent: timeout decision for 'zip_directory': 15
+2026-08-25 01:10:51,489 [INFO] MainProcess: run_agent: timeout hit for 'zip_directory' (pid=18240), requesting decision
+2026-08-25 01:10:51,491 [INFO] MainProcess: _ask_timeout_decision: starting for tool 'zip_directory' (id=call_itfnpfay, pid=18240)
+2026-08-25 01:10:51,495 [INFO] MainProcess: _ask_timeout_decision: attempt 1/3 for 'zip_directory'
+2026-08-25 01:10:51,531 [INFO] MainProcess: [chat] START buffer_id=sJR6XfYP model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:11:00,353 [INFO] MainProcess: _ask_timeout_decision: got decision=15 on attempt 1
+2026-08-25 01:11:00,369 [INFO] MainProcess: run_agent: timeout decision for 'zip_directory': 15
+2026-08-25 01:11:15,380 [INFO] MainProcess: run_agent: timeout hit for 'zip_directory' (pid=18240), requesting decision
+2026-08-25 01:11:15,384 [INFO] MainProcess: _ask_timeout_decision: starting for tool 'zip_directory' (id=call_itfnpfay, pid=18240)
+2026-08-25 01:11:15,385 [INFO] MainProcess: _ask_timeout_decision: attempt 1/3 for 'zip_directory'
+2026-08-25 01:11:15,386 [INFO] MainProcess: [chat] START buffer_id=gS0ehmSC model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:11:23,665 [INFO] MainProcess: _ask_timeout_decision: got decision=30 on attempt 1
+2026-08-25 01:11:23,666 [INFO] MainProcess: run_agent: timeout decision for 'zip_directory': 30
+2026-08-25 01:11:53,669 [INFO] MainProcess: run_agent: timeout hit for 'zip_directory' (pid=18240), requesting decision
+2026-08-25 01:11:53,670 [INFO] MainProcess: _ask_timeout_decision: starting for tool 'zip_directory' (id=call_itfnpfay, pid=18240)
+2026-08-25 01:11:53,671 [INFO] MainProcess: _ask_timeout_decision: attempt 1/3 for 'zip_directory'
+2026-08-25 01:11:53,671 [INFO] MainProcess: [chat] START buffer_id=F6DG4vjc model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:12:02,980 [INFO] MainProcess: _ask_timeout_decision: got decision=15 on attempt 1
+2026-08-25 01:12:02,985 [INFO] MainProcess: run_agent: timeout decision for 'zip_directory': 15
+2026-08-25 01:12:17,998 [INFO] MainProcess: run_agent: timeout hit for 'zip_directory' (pid=18240), requesting decision
+2026-08-25 01:12:18,013 [INFO] MainProcess: _ask_timeout_decision: starting for tool 'zip_directory' (id=call_itfnpfay, pid=18240)
+2026-08-25 01:12:18,025 [INFO] MainProcess: _ask_timeout_decision: attempt 1/3 for 'zip_directory'
+2026-08-25 01:12:18,039 [INFO] MainProcess: [chat] START buffer_id=5kNGjnyA model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:12:26,503 [INFO] MainProcess: _ask_timeout_decision: got decision=15 on attempt 1
+2026-08-25 01:12:26,504 [INFO] MainProcess: run_agent: timeout decision for 'zip_directory': 15
+2026-08-25 01:12:41,508 [INFO] MainProcess: run_agent: timeout hit for 'zip_directory' (pid=18240), requesting decision
+2026-08-25 01:12:41,509 [INFO] MainProcess: _ask_timeout_decision: starting for tool 'zip_directory' (id=call_itfnpfay, pid=18240)
+2026-08-25 01:12:41,510 [INFO] MainProcess: _ask_timeout_decision: attempt 1/3 for 'zip_directory'
+2026-08-25 01:12:41,510 [INFO] MainProcess: [chat] START buffer_id=vs5XsVhg model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:12:50,173 [INFO] MainProcess: _ask_timeout_decision: got decision=15 on attempt 1
+2026-08-25 01:12:50,175 [INFO] MainProcess: run_agent: timeout decision for 'zip_directory': 15
+2026-08-25 01:13:05,179 [INFO] MainProcess: run_agent: timeout hit for 'zip_directory' (pid=18240), requesting decision
+2026-08-25 01:13:05,179 [INFO] MainProcess: _ask_timeout_decision: starting for tool 'zip_directory' (id=call_itfnpfay, pid=18240)
+2026-08-25 01:13:05,180 [INFO] MainProcess: _ask_timeout_decision: attempt 1/3 for 'zip_directory'
+2026-08-25 01:13:05,180 [INFO] MainProcess: [chat] START buffer_id=0F5yc3kS model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:13:16,005 [INFO] MainProcess: _ask_timeout_decision: got decision=15 on attempt 1
+2026-08-25 01:13:16,006 [INFO] MainProcess: run_agent: timeout decision for 'zip_directory': 15
+2026-08-25 01:13:31,010 [INFO] MainProcess: run_agent: timeout hit for 'zip_directory' (pid=18240), requesting decision
+2026-08-25 01:13:31,011 [INFO] MainProcess: _ask_timeout_decision: starting for tool 'zip_directory' (id=call_itfnpfay, pid=18240)
+2026-08-25 01:13:31,041 [INFO] MainProcess: _ask_timeout_decision: attempt 1/3 for 'zip_directory'
+2026-08-25 01:13:31,041 [INFO] MainProcess: [chat] START buffer_id=6hqot3kT model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:13:39,249 [INFO] MainProcess: _ask_timeout_decision: got decision=15 on attempt 1
+2026-08-25 01:13:39,250 [INFO] MainProcess: run_agent: timeout decision for 'zip_directory': 15
+2026-08-25 01:13:54,257 [INFO] MainProcess: run_agent: timeout hit for 'zip_directory' (pid=18240), requesting decision
+2026-08-25 01:13:54,261 [INFO] MainProcess: _ask_timeout_decision: starting for tool 'zip_directory' (id=call_itfnpfay, pid=18240)
+2026-08-25 01:13:54,264 [INFO] MainProcess: _ask_timeout_decision: attempt 1/3 for 'zip_directory'
+2026-08-25 01:13:54,268 [INFO] MainProcess: [chat] START buffer_id=A7igsYO4 model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:16:03,656 [INFO] MainProcess: run_agent: starting | model='qwen3:14b' max_turns=50 tools=10 skills=1
+2026-08-25 01:16:03,657 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 01:16:03,658 [INFO] MainProcess: [chat] START buffer_id=jcqsc7Nr model='qwen3:14b' base_url='https://grade-parcel-property-sas.trycloudflare.com/v1'
+2026-08-25 01:16:13,748 [ERROR] MainProcess: [chat] FAILED buffer_id=jcqsc7Nr after 0 chunk(s): Error code: 400 - {'error': {'message': 'image URLs are not currently supported, please use base64 encoded data instead', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/generation/openai.py", line 240, in _stream_chat
+    stream = client.chat.completions.create(**create_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_utils/_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 1296, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1382, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1155, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'image URLs are not currently supported, please use base64 encoded data instead', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+2026-08-25 01:16:13,817 [ERROR] MainProcess: run_agent: stream error at turn 1: Error code: 400 - {'error': {'message': 'image URLs are not currently supported, please use base64 encoded data instead', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+2026-08-25 01:23:31,953 [INFO] MainProcess: run_agent: starting | model='qwen3:14b' max_turns=50 tools=10 skills=1
+2026-08-25 01:23:31,954 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 01:23:31,955 [INFO] MainProcess: [chat] START buffer_id=q2EKrdBs model='qwen3:14b' base_url='https://forwarding-improvement-indiana-crops.trycloudflare.com/v1'
+2026-08-25 01:23:36,445 [ERROR] MainProcess: [chat] FAILED buffer_id=q2EKrdBs after 0 chunk(s): Error code: 404 - {'error': {'message': "model 'qwen3:14b' not found", 'type': 'not_found_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/generation/openai.py", line 240, in _stream_chat
+    stream = client.chat.completions.create(**create_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_utils/_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 1296, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1382, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1155, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.NotFoundError: Error code: 404 - {'error': {'message': "model 'qwen3:14b' not found", 'type': 'not_found_error', 'param': None, 'code': None}}
+2026-08-25 01:23:36,459 [ERROR] MainProcess: run_agent: stream error at turn 1: Error code: 404 - {'error': {'message': "model 'qwen3:14b' not found", 'type': 'not_found_error', 'param': None, 'code': None}}
+2026-08-25 01:23:58,517 [INFO] MainProcess: run_agent: starting | model='qwen3-vl:8b' max_turns=50 tools=10 skills=1
+2026-08-25 01:23:58,518 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 01:23:58,519 [INFO] MainProcess: [chat] START buffer_id=oMoUU9dM model='qwen3-vl:8b' base_url='https://forwarding-improvement-indiana-crops.trycloudflare.com/v1'
+2026-08-25 01:25:44,782 [INFO] MainProcess: [chat] DONE buffer_id=oMoUU9dM chunks=26
+2026-08-25 01:25:44,784 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=0 tool_calls=0
+2026-08-25 01:25:44,785 [INFO] MainProcess: run_agent: model finished at turn 1
+2026-08-25 01:31:02,883 [INFO] MainProcess: run_agent: starting | model='llama3.2-vision:11b' max_turns=50 tools=10 skills=1
+2026-08-25 01:31:02,884 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 01:31:02,885 [INFO] MainProcess: [chat] START buffer_id=gUgWvawS model='llama3.2-vision:11b' base_url='https://optimum-camp-sample-plastic.trycloudflare.com/v1'
+2026-08-25 01:31:51,661 [ERROR] MainProcess: [chat] FAILED buffer_id=gUgWvawS after 0 chunk(s): Error code: 500 - {'error': {'message': "llama-server process has terminated: exit status 1: error loading model: unknown model architecture: 'mllama'\nerror loading model: unknown model architecture: 'mllama'", 'type': 'api_error', 'param': None, 'code': None}}
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/generation/openai.py", line 240, in _stream_chat
+    stream = client.chat.completions.create(**create_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_utils/_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 1296, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1382, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/openai/_base_client.py", line 1155, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.InternalServerError: Error code: 500 - {'error': {'message': "llama-server process has terminated: exit status 1: error loading model: unknown model architecture: 'mllama'\nerror loading model: unknown model architecture: 'mllama'", 'type': 'api_error', 'param': None, 'code': None}}
+2026-08-25 01:31:51,669 [ERROR] MainProcess: run_agent: stream error at turn 1: Error code: 500 - {'error': {'message': "llama-server process has terminated: exit status 1: error loading model: unknown model architecture: 'mllama'\nerror loading model: unknown model architecture: 'mllama'", 'type': 'api_error', 'param': None, 'code': None}}
+2026-08-25 01:36:55,111 [INFO] MainProcess: run_agent: starting | model='minicpm-v4.5:8b' max_turns=50 tools=10 skills=1
+2026-08-25 01:36:55,111 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-25 01:36:55,112 [INFO] MainProcess: [chat] START buffer_id=PUHRz7dX model='minicpm-v4.5:8b' base_url='https://happens-bridges-module-wings.trycloudflare.com/v1'
+2026-08-25 01:38:51,274 [INFO] MainProcess: [chat] DONE buffer_id=PUHRz7dX chunks=95
+2026-08-25 01:38:51,276 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=429 tool_calls=0
+2026-08-25 01:38:51,276 [INFO] MainProcess: run_agent: model finished at turn 1

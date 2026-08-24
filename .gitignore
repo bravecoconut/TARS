@@ -48,3 +48,4 @@ venv.bak/
 z_ignore/
 todo
 logs/
+embedding_model/

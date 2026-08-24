@@ -1,6 +1,5 @@
 {
-    "name": "Asad",
-    "private_key": "TARS",
+    "name": "asad",
     "instructions_path": "instructions/instructions.md",
     "avail_tones": {
         "clear": {
@@ -20,17 +19,18 @@
             "path": "tones/emotional.md"
         }
     },
-    "curr_tone": "sarcastic",
-    "set_memory_sm_path":"agent/system/markdowns/set_memory.md",
+    "curr_tone": "clear",
+    "set_memory_sm_path": "agent/system/markdowns/set_memory.md",
     "memory_path": "memory/memory.md",
-    "base_url": "https://flag-communications-recipes-response.trycloudflare.com/v1",
+    "base_url": "https://happens-bridges-module-wings.trycloudflare.com/v1",
     "api_key": "ollama",
-    "model": "qwen3:14b",
+    "model": "minicpm-v4.5:8b",
+    "max_completion_tokens": 30000,
+    "max_retries": 5,
+    "timeout": 120,
     "srcf_on_length": 50,
-    "srcf_percent":80,
-    "srcf_last_n":5,
-    "srcf_threshold":0.323,
-    "max_completion_tokens":30000,
-    "max_retries":5,
-    "timeout":60
+    "srcf_percent": 70,
+    "srcf_last_n": 5,
+    "srcf_threshold": 0.323,
+    "embeding_model_path": "embedding_model"
 }

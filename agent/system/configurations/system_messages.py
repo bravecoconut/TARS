@@ -58,5 +58,3 @@ def system_messages():
     sm.append(memory_system_message())
     sm.append(set_memory_system_message())
     return sm
-
-print(json.dumps(system_messages(), indent=4))

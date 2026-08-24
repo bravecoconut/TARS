@@ -89,9 +89,9 @@ class RegularInterface:
             if SKILL_MANIPULATION_TOOLS:
                 self.openai_agent_tools += SKILL_MANIPULATION_TOOLS
 
-        if self.default_skills and messages:
+        if self.default_skills and messages and isinstance(messages[-1].get("content"), str):
             self.raw_contexts, self.contexts = retriving_pool(
-                query=messages[-1]["content"],
+                query=messages[-1].get("content"),
                 locations=self.default_skills,
             )
 
