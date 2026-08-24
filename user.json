@@ -1,31 +1,36 @@
 {
-    "name": "no-name-provider",
-    "private_key_h": "you are a helpfull assistant, alway be clear.",
-    "instructions_for_tars": null,
+    "name": "Asad",
+    "private_key": "TARS",
+    "instructions_path": "instructions/instructions.md",
     "avail_tones": {
         "clear": {
-            "temp": 1,
+            "temp": 0.3,
             "path": "tones/clear.md"
         },
         "robotic": {
-            "temp": 1,
+            "temp": 0.1,
             "path": "tones/robotic.md"
         },
         "sarcastic": {
-            "temp": 1,
+            "temp": 0.9,
             "path": "tones/sarcastic.md"
         },
         "emotional": {
-            "temp": 1,
+            "temp": 0.85,
             "path": "tones/emotional.md"
         }
     },
-    "curr_tone": "robotic",
-    "memory": true,
+    "curr_tone": "sarcastic",
+    "set_memory_sm_path":"agent/system/markdowns/set_memory.md",
     "memory_path": "memory/memory.md",
-    "base_url": "https://api.openai.com/v1",
-    "api_key": null,
-    "model":null,
+    "base_url": "https://flag-communications-recipes-response.trycloudflare.com/v1",
+    "api_key": "ollama",
+    "model": "qwen3:14b",
     "srcf_on_length": 50,
-    "max_agent_turns": 200
+    "srcf_percent":80,
+    "srcf_last_n":5,
+    "srcf_threshold":0.323,
+    "max_completion_tokens":30000,
+    "max_retries":5,
+    "timeout":60
 }
