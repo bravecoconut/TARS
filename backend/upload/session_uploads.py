@@ -36,13 +36,13 @@ if __name__ == "__main__":
 
     async def main():
         await init_db()
-        result = await create_new_message(
+        result = await create_new_session(
             "6a8d47b3e521351855556c50",
-        {
-            "role": "assistant",
-            "content": "how can i assist you today",
-            "created": "",
-        },
+        # {
+        #     "role": "assistant",
+        #     "content": "how can i assist you today",
+        #     "created": "",
+        # },
 
         )
         print(result)

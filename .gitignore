@@ -51,4 +51,3 @@ logs/
 embedding_model/
 
 # temp ignore
-flask_blueprints

@@ -1,6 +1,7 @@
 {
     "name": "asad",
     "instructions_path": "instructions/instructions.md",
+    "sec_key": "TARS",
     "avail_tones": {
         "clear": {
             "temp": 0.3,
