@@ -17,6 +17,16 @@ async def get_session(session_id, start=1, end=-1):
     except Exception as e:
         return r_h(False, "Error occured when getting session", str(e))
 
+async def check_session(session_id):
+    try:
+        session = await Sessions.get(session_id)
+        if not session:
+            raise Exception("session not exists")
+
+        return r_h(True, "session exists")
+    except Exception as e:
+        return r_h(False, "Error occured when getting session, it means session dont exists", str(e))
+  
 
 if __name__ == "__main__":
     from db import init_db
@@ -26,7 +36,7 @@ if __name__ == "__main__":
 
     async def main():
         await init_db()
-        result = await get_session("6a8d47b3e521351855556c50")
+        result = await check_session("6a8d47b3e521351855556c50")
         print(json.dumps(result, indent=4, default=str))
 
     asyncio.run(main())
