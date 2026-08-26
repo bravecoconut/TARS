@@ -49,5 +49,6 @@ z_ignore/
 todo
 logs/
 embedding_model/
+TARS_DB/
 
 # temp ignore

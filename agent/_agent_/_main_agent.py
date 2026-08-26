@@ -1,11 +1,12 @@
 from fluid.regular_interface.interface import RegularInterface
 from fluid.regular_interface.srcf import SRCF
 from agent.system.configurations.system_messages import system_messages, tone_temp
-from agent.system.configurations.configs.skills import OS_AGENT_SKILL
+from agent.system.configurations.configs.skills import get_skill
 from agent.system.configurations.configs.settings import ALL_TOOLS
 import os
 from dotenv import load_dotenv
 import json
+
 load_dotenv()
 
 from agent.system.configurations.configs.open_configs import (
@@ -15,8 +16,9 @@ from agent.system.configurations.configs.open_configs import (
 )
 import time
 
+
 class _Main_Agent:
-    def __init__(self, messages):
+    def __init__(self, messages, meta=None):
         with open("user.json") as file:
             self._user = json.load(file)
         self.srcf = None
@@ -31,7 +33,7 @@ class _Main_Agent:
         self.ri = RegularInterface(
             messages=messages,
             sys_messages=system_messages(),
-            skills=OS_AGENT_SKILL,
+            skills=get_skill(meta=meta),
             max_new_skill=os.getenv("MAX_NEW_SKILLS"),
             all_tools=ALL_TOOLS,
             max_turns=int(os.getenv("MAX_TURNS")),

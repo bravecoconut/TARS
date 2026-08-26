@@ -4,6 +4,7 @@ import time
 
 class Sessions(Document):
     name: str="no name provided"
+    dumped_paths:list[str]=[]
     pin: bool = False
     created: float = Field(default_factory=time.time)
     streaming: bool = False

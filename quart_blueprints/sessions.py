@@ -2,8 +2,11 @@ from quart import Blueprint, request, jsonify
 from backend.upload.session_uploads import create_new_session, create_new_message
 from backend.update.session import change_name, toggle_pin, update_last_user_message
 from backend.gather.session import get_session, check_session
+from backend.delete.session import delete_session
 from utils import get_sec_key, r_h, validate_sec_key
 import json
+from agent_backend.chroma.dump import delete_using_meta
+from agent.system.configurations.configs.skills import BASE_COLLECTION_NAME
 
 sessions_bp = Blueprint("sessions", __name__, url_prefix="/api/sessions")
 
@@ -28,7 +31,55 @@ async def create_session():
         _result = await create_new_session(name=str(_new_session_name))
         return jsonify(_result)
     except Exception as e:
-        return jsonify(r_h(False, "something went wrong while creating session", str(e)))
+        return jsonify(
+            r_h(False, "something went wrong while creating session", str(e))
+        )
+
+
+@sessions_bp.route("/delete_session", methods=["POST"])
+async def _delete_session():
+    try:
+        # validate sec key
+        sec_key = validate_sec_key(sec_key=request.cookies.get("sec_key"))
+        if not sec_key["status"]:
+            return jsonify(sec_key)
+
+        # main logic
+        data = await request.get_json(silent=True)
+        _session_id = data.get("session_id") if data.get("session_id") else None
+
+        _result = await delete_session(session_id=str(_session_id))
+
+        if not _result:
+            return jsonify(
+                r_h(
+                    False,
+                    "something went wrong while deleting session",
+                    str(e),
+                )
+            )
+
+        _clear_vectors = delete_using_meta(
+            BASE_COLLECTION_NAME,
+            {
+                "session_id": _session_id,
+            },
+        )
+
+        if not _clear_vectors:
+            return jsonify(
+                r_h(
+                    False,
+                    "something went wrong while clearing session vectors",
+                    str(e),
+                )
+            )
+
+        return jsonify({"main_result":_result, "vector_clear":_clear_vectors})
+    except Exception as e:
+        return jsonify(
+            r_h(False, "something went wrong while deleting session", str(e))
+        )
 
 
 @sessions_bp.route("/create_new_message", methods=["POST"])
@@ -52,7 +103,9 @@ async def create_message():
         _result = await create_new_message(session_id=_session_id, message=_new_message)
         return jsonify(_result)
     except Exception as e:
-        return jsonify(r_h(False, "something went wrong while creating message", str(e)))
+        return jsonify(
+            r_h(False, "something went wrong while creating message", str(e))
+        )
 
 
 @sessions_bp.route("/change_session_name", methods=["POST"])

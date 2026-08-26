@@ -29,6 +29,17 @@ async def create_new_message(session_id, message):
         return r_h(False, "Error occured when adding a new message", str(e))
 
 
+async def add_new_path(session_id, path):
+    try:
+        session = await Sessions.get(session_id)
+        session.dumped_paths.append(path)
+        _result = await session.save()
+
+        return r_h(True, "new path added", str(_result))
+    except Exception as e:
+        return r_h(False, "Error occured when adding a new path", str(e))
+
+
 if __name__ == "__main__":
     from db import init_db
     import asyncio
@@ -36,15 +47,16 @@ if __name__ == "__main__":
 
     async def main():
         await init_db()
-        result = await create_new_session(
-            "6a8d47b3e521351855556c50",
-        # {
-        #     "role": "assistant",
-        #     "content": "how can i assist you today",
-        #     "created": "",
-        # },
-
+        result = await add_new_path(
+            "6a8f0e7690b134d8503f57b5",
+            # {
+            #     "role": "assistant",
+            #     "content": "how can i assist you today",
+            #     "created": "",
+            # },
+            "sdasdas"
         )
+        # result = await create_new_session(name="test")
         print(result)
 
     asyncio.run(main())
