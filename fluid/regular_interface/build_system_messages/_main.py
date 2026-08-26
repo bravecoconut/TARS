@@ -241,8 +241,14 @@ class BuildSystemMessages:
 
                 context_buff = ""
 
+                collection_name = collection.get("name")
+
                 for context in contexts:
                     if not isinstance(context, dict):
+                        continue
+
+                    # Only use results from the context that matches this collection
+                    if context.get("name") != collection_name:
                         continue
 
                     results_contexts = context.get("results_contexts")

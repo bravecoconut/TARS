@@ -1776,3 +1776,1180 @@ openai.InternalServerError: Error code: 500 - {'error': {'message': "llama-serve
 2026-08-25 01:38:51,274 [INFO] MainProcess: [chat] DONE buffer_id=PUHRz7dX chunks=95
 2026-08-25 01:38:51,276 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=429 tool_calls=0
 2026-08-25 01:38:51,276 [INFO] MainProcess: run_agent: model finished at turn 1
+2026-08-27 00:35:33,932 [INFO] MainProcess: run_agent: starting | model='minicpm-v4.5:8b' max_turns=50 tools=10 skills=1
+2026-08-27 00:35:33,954 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-27 00:35:33,974 [INFO] MainProcess: [chat] START buffer_id=UZHHLnIJ model='minicpm-v4.5:8b' base_url='https://magnitude-actor-sensor-lucia.trycloudflare.com/v1'
+2026-08-27 00:37:22,345 [INFO] MainProcess: [chat] DONE buffer_id=UZHHLnIJ chunks=71
+2026-08-27 00:37:22,347 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=313 tool_calls=0
+2026-08-27 00:37:22,349 [INFO] MainProcess: run_agent: model finished at turn 1
+2026-08-27 00:37:45,009 [INFO] MainProcess: run_agent: starting | model='minicpm-v4.5:8b' max_turns=50 tools=10 skills=1
+2026-08-27 00:37:45,013 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-27 00:37:45,014 [INFO] MainProcess: [chat] START buffer_id=uTeSKOtC model='minicpm-v4.5:8b' base_url='https://magnitude-actor-sensor-lucia.trycloudflare.com/v1'
+2026-08-27 00:38:00,411 [INFO] MainProcess: [chat] DONE buffer_id=uTeSKOtC chunks=101
+2026-08-27 00:38:00,413 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=457 tool_calls=0
+2026-08-27 00:38:00,414 [INFO] MainProcess: run_agent: model finished at turn 1
+2026-08-27 00:38:49,517 [INFO] MainProcess: run_agent: starting | model='minicpm-v4.5:8b' max_turns=50 tools=10 skills=1
+2026-08-27 00:38:49,518 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-27 00:38:49,519 [INFO] MainProcess: [chat] START buffer_id=oYozrRjk model='minicpm-v4.5:8b' base_url='https://magnitude-actor-sensor-lucia.trycloudflare.com/v1'
+2026-08-27 00:38:58,915 [INFO] MainProcess: [chat] DONE buffer_id=oYozrRjk chunks=87
+2026-08-27 00:38:58,918 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=388 tool_calls=0
+2026-08-27 00:38:58,919 [INFO] MainProcess: run_agent: model finished at turn 1
+2026-08-27 00:42:07,489 [INFO] MainProcess: run_agent: starting | model='minicpm-v4.5:8b' max_turns=50 tools=10 skills=1
+2026-08-27 00:42:07,490 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-27 00:42:07,491 [INFO] MainProcess: [chat] START buffer_id=YWwaexiz model='minicpm-v4.5:8b' base_url='https://magnitude-actor-sensor-lucia.trycloudflare.com/v1'
+2026-08-27 00:42:19,872 [INFO] MainProcess: [chat] DONE buffer_id=YWwaexiz chunks=131
+2026-08-27 00:42:19,874 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=584 tool_calls=0
+2026-08-27 00:42:19,875 [INFO] MainProcess: run_agent: model finished at turn 1
+2026-08-27 00:43:38,853 [INFO] MainProcess: run_agent: starting | model='minicpm-v4.5:8b' max_turns=50 tools=10 skills=1
+2026-08-27 00:43:38,854 [INFO] MainProcess: run_agent: turn 1/50 | messages=8
+2026-08-27 00:43:38,885 [INFO] MainProcess: [chat] START buffer_id=hJeaztU9 model='minicpm-v4.5:8b' base_url='https://magnitude-actor-sensor-lucia.trycloudflare.com/v1'
+2026-08-27 00:43:47,181 [INFO] MainProcess: [chat] DONE buffer_id=hJeaztU9 chunks=88
+2026-08-27 00:43:47,182 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=407 tool_calls=0
+2026-08-27 00:43:47,182 [INFO] MainProcess: run_agent: model finished at turn 1
+2026-08-27 00:45:14,466 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:45:14,481 [INFO] MainProcess: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:45:25,778 [INFO] SpawnPoolWorker-2: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:45:25,779 [INFO] SpawnPoolWorker-2: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:45:25,788 [ERROR] SpawnPoolWorker-2: retriving_pool: worker pool failed entirely: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retriveing_pool.py", line 317, in retriving_pool
+    with _ctx.Pool(processes=processes) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+2026-08-27 00:45:25,846 [INFO] SpawnPoolWorker-4: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:45:25,849 [INFO] SpawnPoolWorker-4: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:45:25,861 [ERROR] SpawnPoolWorker-4: retriving_pool: worker pool failed entirely: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retriveing_pool.py", line 317, in retriving_pool
+    with _ctx.Pool(processes=processes) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+2026-08-27 00:45:25,974 [INFO] SpawnPoolWorker-1: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:45:25,975 [INFO] SpawnPoolWorker-1: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:45:25,974 [INFO] SpawnPoolWorker-3: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:45:25,984 [ERROR] SpawnPoolWorker-1: retriving_pool: worker pool failed entirely: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retriveing_pool.py", line 317, in retriving_pool
+    with _ctx.Pool(processes=processes) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+2026-08-27 00:45:25,992 [INFO] SpawnPoolWorker-3: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:45:26,011 [ERROR] SpawnPoolWorker-3: retriving_pool: worker pool failed entirely: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retriveing_pool.py", line 317, in retriving_pool
+    with _ctx.Pool(processes=processes) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+2026-08-27 00:45:37,913 [INFO] SpawnPoolWorker-7: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:45:37,914 [INFO] SpawnPoolWorker-7: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:45:37,921 [ERROR] SpawnPoolWorker-7: retriving_pool: worker pool failed entirely: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retriveing_pool.py", line 317, in retriving_pool
+    with _ctx.Pool(processes=processes) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+2026-08-27 00:45:37,973 [INFO] SpawnPoolWorker-6: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:45:37,976 [INFO] SpawnPoolWorker-6: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:45:37,988 [ERROR] SpawnPoolWorker-6: retriving_pool: worker pool failed entirely: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retriveing_pool.py", line 317, in retriving_pool
+    with _ctx.Pool(processes=processes) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+2026-08-27 00:45:38,034 [INFO] SpawnPoolWorker-5: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:45:38,036 [INFO] SpawnPoolWorker-5: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:45:38,045 [ERROR] SpawnPoolWorker-5: retriving_pool: worker pool failed entirely: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retriveing_pool.py", line 317, in retriving_pool
+    with _ctx.Pool(processes=processes) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+2026-08-27 00:45:38,718 [INFO] SpawnPoolWorker-8: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:45:38,723 [INFO] SpawnPoolWorker-8: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:45:38,740 [ERROR] SpawnPoolWorker-8: retriving_pool: worker pool failed entirely: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retriveing_pool.py", line 317, in retriving_pool
+    with _ctx.Pool(processes=processes) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+2026-08-27 00:47:12,150 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:47:12,150 [INFO] MainProcess: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:47:21,757 [INFO] SpawnPoolWorker-1: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:47:21,759 [INFO] SpawnPoolWorker-1: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:47:21,771 [ERROR] SpawnPoolWorker-1: retriving_pool: worker pool failed entirely: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retriveing_pool.py", line 317, in retriving_pool
+    with _ctx.Pool(processes=processes) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+2026-08-27 00:47:23,296 [INFO] SpawnPoolWorker-4: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:47:23,298 [INFO] SpawnPoolWorker-4: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:47:23,317 [ERROR] SpawnPoolWorker-4: retriving_pool: worker pool failed entirely: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retriveing_pool.py", line 317, in retriving_pool
+    with _ctx.Pool(processes=processes) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+2026-08-27 00:47:23,412 [INFO] SpawnPoolWorker-3: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:47:23,414 [INFO] SpawnPoolWorker-3: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:47:23,424 [ERROR] SpawnPoolWorker-3: retriving_pool: worker pool failed entirely: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retriveing_pool.py", line 317, in retriving_pool
+    with _ctx.Pool(processes=processes) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+2026-08-27 00:47:23,515 [INFO] SpawnPoolWorker-2: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:47:23,517 [INFO] SpawnPoolWorker-2: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:47:23,525 [ERROR] SpawnPoolWorker-2: retriving_pool: worker pool failed entirely: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retriveing_pool.py", line 317, in retriving_pool
+    with _ctx.Pool(processes=processes) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 289, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/usr/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        
+2026-08-27 00:58:05,328 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 00:58:05,329 [INFO] MainProcess: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 00:58:18,917 [INFO] SpawnPoolWorker-4: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=tBDMgUe2
+2026-08-27 00:58:19,673 [INFO] SpawnPoolWorker-2: [persistent] START query='tell me about cocktail books' collection='OS' path='TARS_DB' mid=YrnmdNxk
+2026-08-27 00:58:20,111 [ERROR] SpawnPoolWorker-2: [persistent] FAILED collection='OS' path='TARS_DB' error=Collection [OS] does not exist
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retrive.py", line 153, in chroma_db_persistent
+    collec = client.get_collection(name=collection_name, embedding_function=built_ef)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/client.py", line 260, in get_collection
+    model = self._server.get_collection(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/rust.py", line 272, in get_collection
+    collection = self.bindings.get_collection(name, tenant, database)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+chromadb.errors.NotFoundError: Collection [OS] does not exist
+2026-08-27 01:02:18,608 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:02:18,630 [INFO] MainProcess: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 01:02:29,242 [INFO] SpawnPoolWorker-3: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=dePPaWes
+2026-08-27 01:02:29,428 [INFO] SpawnPoolWorker-2: [persistent] START query='tell me about cocktail books' collection='OS' path='TARS_DB' mid=yU8NE1fV
+2026-08-27 01:02:29,938 [ERROR] SpawnPoolWorker-2: [persistent] FAILED collection='OS' path='TARS_DB' error=Collection [OS] does not exist
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retrive.py", line 153, in chroma_db_persistent
+    collec = client.get_collection(name=collection_name, embedding_function=built_ef)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/client.py", line 260, in get_collection
+    model = self._server.get_collection(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/rust.py", line 272, in get_collection
+    collection = self.bindings.get_collection(name, tenant, database)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+chromadb.errors.NotFoundError: Collection [OS] does not exist
+2026-08-27 01:03:01,869 [INFO] SpawnPoolWorker-3: [persistent] DONE collection='base' matched=3 mid=dePPaWes
+2026-08-27 01:03:01,909 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 1 failed, out of 2 task(s).
+2026-08-27 01:03:06,931 [INFO] MainProcess: run_agent: starting | model='minicpm-v4.5:8b' max_turns=50 tools=10 skills=1
+2026-08-27 01:03:06,934 [INFO] MainProcess: run_agent: turn 1/50 | messages=9
+2026-08-27 01:03:06,935 [INFO] MainProcess: [chat] START buffer_id=Ay2LX2IV model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:04:05,338 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:04:05,339 [INFO] MainProcess: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 01:04:15,760 [INFO] SpawnPoolWorker-2: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=8zUHOKsf
+2026-08-27 01:04:15,826 [INFO] SpawnPoolWorker-3: [persistent] START query='tell me about cocktail books' collection='OS' path='TARS_DB' mid=m7ec63KK
+2026-08-27 01:04:16,346 [ERROR] SpawnPoolWorker-3: [persistent] FAILED collection='OS' path='TARS_DB' error=Collection [OS] does not exist
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retrive.py", line 153, in chroma_db_persistent
+    collec = client.get_collection(name=collection_name, embedding_function=built_ef)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/client.py", line 260, in get_collection
+    model = self._server.get_collection(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/rust.py", line 272, in get_collection
+    collection = self.bindings.get_collection(name, tenant, database)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+chromadb.errors.NotFoundError: Collection [OS] does not exist
+2026-08-27 01:04:19,574 [INFO] SpawnPoolWorker-2: [persistent] DONE collection='base' matched=3 mid=8zUHOKsf
+2026-08-27 01:04:19,608 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 1 failed, out of 2 task(s).
+2026-08-27 01:04:24,616 [INFO] MainProcess: run_agent: starting | model='minicpm-v4.5:8b' max_turns=50 tools=10 skills=1
+2026-08-27 01:04:24,617 [INFO] MainProcess: run_agent: turn 1/50 | messages=9
+2026-08-27 01:04:24,618 [INFO] MainProcess: [chat] START buffer_id=H0TzHnI5 model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:04:34,324 [INFO] MainProcess: [chat] DONE buffer_id=H0TzHnI5 chunks=93
+2026-08-27 01:04:34,328 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=478 tool_calls=0
+2026-08-27 01:04:34,329 [INFO] MainProcess: run_agent: model finished at turn 1
+2026-08-27 01:04:50,263 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:04:50,263 [INFO] MainProcess: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 01:05:00,428 [INFO] SpawnPoolWorker-4: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=MLR6oEWR
+2026-08-27 01:05:00,435 [INFO] SpawnPoolWorker-3: [persistent] START query='tell me about cocktail books' collection='OS' path='TARS_DB' mid=Uaa0OD3w
+2026-08-27 01:05:00,859 [ERROR] SpawnPoolWorker-3: [persistent] FAILED collection='OS' path='TARS_DB' error=Collection [OS] does not exist
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retrive.py", line 153, in chroma_db_persistent
+    collec = client.get_collection(name=collection_name, embedding_function=built_ef)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/client.py", line 260, in get_collection
+    model = self._server.get_collection(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/rust.py", line 272, in get_collection
+    collection = self.bindings.get_collection(name, tenant, database)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+chromadb.errors.NotFoundError: Collection [OS] does not exist
+2026-08-27 01:05:03,023 [INFO] SpawnPoolWorker-4: [persistent] DONE collection='base' matched=3 mid=MLR6oEWR
+2026-08-27 01:05:03,058 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 1 failed, out of 2 task(s).
+2026-08-27 01:05:08,066 [INFO] MainProcess: run_agent: starting | model='minicpm-v4.5:8b' max_turns=50 tools=10 skills=1
+2026-08-27 01:05:08,067 [INFO] MainProcess: run_agent: turn 1/50 | messages=9
+2026-08-27 01:05:08,071 [INFO] MainProcess: [chat] START buffer_id=4ZwAxKj4 model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:05:12,364 [INFO] MainProcess: [chat] DONE buffer_id=4ZwAxKj4 chunks=43
+2026-08-27 01:05:12,365 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='tool_calls' content_len=197 tool_calls=1
+2026-08-27 01:05:12,366 [INFO] MainProcess: run_agent: turn 1 has 1 tool call(s): ['read_text_file']
+2026-08-27 01:05:12,368 [INFO] MainProcess: run_agent: spawning external tool 'read_text_file' (id=R4BlBezyoRF3zvrPvYciT6cnxCAcnF0W) | timeout=30s args={'path': 'cocktail_books.txt', 'max_chars': 0}
+2026-08-27 01:05:12,409 [INFO] MainProcess: run_agent: worker process started for 'read_text_file' (worker_pid=33123)
+2026-08-27 01:05:13,459 [INFO] MainProcess: run_agent: tool 'read_text_file' finished | output_len=291
+2026-08-27 01:05:13,460 [INFO] MainProcess: run_agent: turn 2/50 | messages=11
+2026-08-27 01:05:13,461 [INFO] MainProcess: [chat] START buffer_id=tScTAbKQ model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:05:16,595 [INFO] MainProcess: [chat] DONE buffer_id=tScTAbKQ chunks=64
+2026-08-27 01:05:16,596 [INFO] MainProcess: run_agent: turn 2 stream done | finish_reason='stop' content_len=283 tool_calls=0
+2026-08-27 01:05:16,597 [INFO] MainProcess: run_agent: model finished at turn 2
+2026-08-27 01:12:38,154 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:12:38,155 [INFO] MainProcess: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 01:12:49,874 [INFO] SpawnPoolWorker-2: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=Ux0zf6lf
+2026-08-27 01:12:49,927 [INFO] SpawnPoolWorker-3: [persistent] START query='tell me about cocktail books' collection='OS' path='TARS_DB' mid=SWEi6kkw
+2026-08-27 01:12:50,630 [ERROR] SpawnPoolWorker-3: [persistent] FAILED collection='OS' path='TARS_DB' error=Collection [OS] does not exist
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retrive.py", line 153, in chroma_db_persistent
+    collec = client.get_collection(name=collection_name, embedding_function=built_ef)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/client.py", line 260, in get_collection
+    model = self._server.get_collection(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/rust.py", line 272, in get_collection
+    collection = self.bindings.get_collection(name, tenant, database)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+chromadb.errors.NotFoundError: Collection [OS] does not exist
+2026-08-27 01:12:57,145 [INFO] SpawnPoolWorker-2: [persistent] DONE collection='base' matched=3 mid=Ux0zf6lf
+2026-08-27 01:12:57,180 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 1 failed, out of 2 task(s).
+2026-08-27 01:13:02,187 [INFO] MainProcess: run_agent: starting | model='minicpm-v4.5:8b' max_turns=50 tools=10 skills=1
+2026-08-27 01:13:02,190 [INFO] MainProcess: run_agent: turn 1/50 | messages=9
+2026-08-27 01:13:02,192 [INFO] MainProcess: [chat] START buffer_id=0tcgDUKD model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:13:17,113 [INFO] MainProcess: [chat] DONE buffer_id=0tcgDUKD chunks=62
+2026-08-27 01:13:17,114 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='stop' content_len=312 tool_calls=0
+2026-08-27 01:13:17,115 [INFO] MainProcess: run_agent: model finished at turn 1
+2026-08-27 01:14:31,443 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:14:31,443 [INFO] MainProcess: retriving_pool: dispatching 1 task(s) across up to all worker(s).
+2026-08-27 01:14:40,926 [INFO] SpawnPoolWorker-3: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=ou4Xy6Ua
+2026-08-27 01:14:43,989 [INFO] SpawnPoolWorker-3: [persistent] DONE collection='base' matched=3 mid=ou4Xy6Ua
+2026-08-27 01:14:44,027 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 0 failed, out of 1 task(s).
+2026-08-27 01:14:49,036 [INFO] MainProcess: run_agent: starting | model='minicpm-v4.5:8b' max_turns=50 tools=10 skills=1
+2026-08-27 01:14:49,037 [INFO] MainProcess: run_agent: turn 1/50 | messages=9
+2026-08-27 01:14:49,040 [INFO] MainProcess: [chat] START buffer_id=qA5dlQdv model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:14:54,037 [INFO] MainProcess: [chat] DONE buffer_id=qA5dlQdv chunks=38
+2026-08-27 01:14:54,039 [INFO] MainProcess: run_agent: turn 1 stream done | finish_reason='tool_calls' content_len=175 tool_calls=1
+2026-08-27 01:14:54,040 [INFO] MainProcess: run_agent: turn 1 has 1 tool call(s): ['run_shell_command']
+2026-08-27 01:14:54,041 [INFO] MainProcess: run_agent: spawning external tool 'run_shell_command' (id=D0eiExjcRnYXetecvx13vLbodpHEbxoW) | timeout=30s args={'cmd': "search_books 'cocktail books'"}
+2026-08-27 01:14:54,084 [INFO] MainProcess: run_agent: worker process started for 'run_shell_command' (worker_pid=35079)
+2026-08-27 01:14:55,120 [INFO] MainProcess: run_agent: tool 'run_shell_command' finished | output_len=70
+2026-08-27 01:14:55,121 [INFO] MainProcess: run_agent: turn 2/50 | messages=11
+2026-08-27 01:14:55,121 [INFO] MainProcess: [chat] START buffer_id=h7RYSDF8 model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:14:59,117 [INFO] MainProcess: [chat] DONE buffer_id=h7RYSDF8 chunks=73
+2026-08-27 01:14:59,118 [INFO] MainProcess: run_agent: turn 2 stream done | finish_reason='tool_calls' content_len=334 tool_calls=1
+2026-08-27 01:14:59,119 [INFO] MainProcess: run_agent: turn 2 has 1 tool call(s): ['run_shell_command']
+2026-08-27 01:14:59,120 [INFO] MainProcess: run_agent: spawning external tool 'run_shell_command' (id=pxFd88SLflZ4F1ESs29yECIMOvKCOLLC) | timeout=30s args={'cmd': "search_books 'cocktail books'"}
+2026-08-27 01:14:59,148 [INFO] MainProcess: run_agent: worker process started for 'run_shell_command' (worker_pid=35127)
+2026-08-27 01:15:00,217 [INFO] MainProcess: run_agent: tool 'run_shell_command' finished | output_len=70
+2026-08-27 01:15:00,218 [INFO] MainProcess: run_agent: turn 3/50 | messages=13
+2026-08-27 01:15:00,219 [INFO] MainProcess: [chat] START buffer_id=HaUGdA7l model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:15:04,463 [INFO] MainProcess: [chat] DONE buffer_id=HaUGdA7l chunks=73
+2026-08-27 01:15:04,464 [INFO] MainProcess: run_agent: turn 3 stream done | finish_reason='tool_calls' content_len=335 tool_calls=1
+2026-08-27 01:15:04,464 [INFO] MainProcess: run_agent: turn 3 has 1 tool call(s): ['run_shell_command']
+2026-08-27 01:15:04,465 [INFO] MainProcess: run_agent: spawning external tool 'run_shell_command' (id=9mXcby7mFM4bi5wW4sUcVf9bKvQeNNFd) | timeout=30s args={'cmd': "search_books 'cocktail books'"}
+2026-08-27 01:15:04,622 [INFO] MainProcess: run_agent: worker process started for 'run_shell_command' (worker_pid=35180)
+2026-08-27 01:15:05,654 [INFO] MainProcess: run_agent: tool 'run_shell_command' finished | output_len=70
+2026-08-27 01:15:05,655 [INFO] MainProcess: run_agent: turn 4/50 | messages=15
+2026-08-27 01:15:05,656 [INFO] MainProcess: [chat] START buffer_id=fN6gMgpR model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:15:09,894 [INFO] MainProcess: [chat] DONE buffer_id=fN6gMgpR chunks=73
+2026-08-27 01:15:09,896 [INFO] MainProcess: run_agent: turn 4 stream done | finish_reason='tool_calls' content_len=335 tool_calls=1
+2026-08-27 01:15:09,896 [INFO] MainProcess: run_agent: turn 4 has 1 tool call(s): ['run_shell_command']
+2026-08-27 01:15:09,897 [INFO] MainProcess: run_agent: spawning external tool 'run_shell_command' (id=Ine8AHVvRyscC0ThN0BcO8C8DSKV7KaK) | timeout=30s args={'cmd': "search_books 'cocktail books'"}
+2026-08-27 01:15:09,931 [INFO] MainProcess: run_agent: worker process started for 'run_shell_command' (worker_pid=35229)
+2026-08-27 01:15:10,966 [INFO] MainProcess: run_agent: tool 'run_shell_command' finished | output_len=70
+2026-08-27 01:15:10,967 [INFO] MainProcess: run_agent: turn 5/50 | messages=17
+2026-08-27 01:15:10,968 [INFO] MainProcess: [chat] START buffer_id=BcWwGE8R model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:15:15,099 [INFO] MainProcess: [chat] DONE buffer_id=BcWwGE8R chunks=73
+2026-08-27 01:15:15,100 [INFO] MainProcess: run_agent: turn 5 stream done | finish_reason='tool_calls' content_len=336 tool_calls=1
+2026-08-27 01:15:15,101 [INFO] MainProcess: run_agent: turn 5 has 1 tool call(s): ['run_shell_command']
+2026-08-27 01:15:15,103 [INFO] MainProcess: run_agent: spawning external tool 'run_shell_command' (id=YApiSMgKQWdNIG2yCAs3VDR06UhX1JWE) | timeout=30s args={'cmd': "search_books 'cocktail books'"}
+2026-08-27 01:15:15,129 [INFO] MainProcess: run_agent: worker process started for 'run_shell_command' (worker_pid=35277)
+2026-08-27 01:15:16,165 [INFO] MainProcess: run_agent: tool 'run_shell_command' finished | output_len=70
+2026-08-27 01:15:16,166 [INFO] MainProcess: run_agent: turn 6/50 | messages=19
+2026-08-27 01:15:16,167 [INFO] MainProcess: [chat] START buffer_id=IBjdV8RR model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:15:20,481 [INFO] MainProcess: [chat] DONE buffer_id=IBjdV8RR chunks=73
+2026-08-27 01:15:20,483 [INFO] MainProcess: run_agent: turn 6 stream done | finish_reason='tool_calls' content_len=336 tool_calls=1
+2026-08-27 01:15:20,484 [INFO] MainProcess: run_agent: turn 6 has 1 tool call(s): ['run_shell_command']
+2026-08-27 01:15:20,484 [INFO] MainProcess: run_agent: spawning external tool 'run_shell_command' (id=qqfHKOcQVpiQERUuZ771kdt10IjvwFzl) | timeout=30s args={'cmd': "search_books 'cocktail books'"}
+2026-08-27 01:15:20,511 [INFO] MainProcess: run_agent: worker process started for 'run_shell_command' (worker_pid=35325)
+2026-08-27 01:15:21,554 [INFO] MainProcess: run_agent: tool 'run_shell_command' finished | output_len=70
+2026-08-27 01:15:21,555 [INFO] MainProcess: run_agent: turn 7/50 | messages=21
+2026-08-27 01:15:21,556 [INFO] MainProcess: [chat] START buffer_id=bOPu9bYB model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:15:25,898 [INFO] MainProcess: [chat] DONE buffer_id=bOPu9bYB chunks=73
+2026-08-27 01:15:25,900 [INFO] MainProcess: run_agent: turn 7 stream done | finish_reason='tool_calls' content_len=336 tool_calls=1
+2026-08-27 01:15:25,902 [INFO] MainProcess: run_agent: turn 7 has 1 tool call(s): ['run_shell_command']
+2026-08-27 01:15:25,903 [INFO] MainProcess: run_agent: spawning external tool 'run_shell_command' (id=kzCLs4J6sYmd6EXjPyjkV8UAJCZrfhuD) | timeout=30s args={'cmd': "search_books 'cocktail books'"}
+2026-08-27 01:15:25,933 [INFO] MainProcess: run_agent: worker process started for 'run_shell_command' (worker_pid=35372)
+2026-08-27 01:15:26,973 [INFO] MainProcess: run_agent: tool 'run_shell_command' finished | output_len=70
+2026-08-27 01:15:26,975 [INFO] MainProcess: run_agent: turn 8/50 | messages=23
+2026-08-27 01:15:26,975 [INFO] MainProcess: [chat] START buffer_id=VCUgfE7Z model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:15:31,320 [INFO] MainProcess: [chat] DONE buffer_id=VCUgfE7Z chunks=73
+2026-08-27 01:15:31,321 [INFO] MainProcess: run_agent: turn 8 stream done | finish_reason='tool_calls' content_len=336 tool_calls=1
+2026-08-27 01:15:31,323 [INFO] MainProcess: run_agent: turn 8 has 1 tool call(s): ['run_shell_command']
+2026-08-27 01:15:31,324 [INFO] MainProcess: run_agent: spawning external tool 'run_shell_command' (id=dnaTxVly9fHonXCF9rll74jldWFJEOw4) | timeout=30s args={'cmd': "search_books 'cocktail books'"}
+2026-08-27 01:15:31,356 [INFO] MainProcess: run_agent: worker process started for 'run_shell_command' (worker_pid=35427)
+2026-08-27 01:15:32,395 [INFO] MainProcess: run_agent: tool 'run_shell_command' finished | output_len=70
+2026-08-27 01:15:32,396 [INFO] MainProcess: run_agent: turn 9/50 | messages=25
+2026-08-27 01:15:32,397 [INFO] MainProcess: [chat] START buffer_id=3s9kQjI6 model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:15:36,777 [INFO] MainProcess: [chat] DONE buffer_id=3s9kQjI6 chunks=73
+2026-08-27 01:15:36,779 [INFO] MainProcess: run_agent: turn 9 stream done | finish_reason='tool_calls' content_len=335 tool_calls=1
+2026-08-27 01:15:36,780 [INFO] MainProcess: run_agent: turn 9 has 1 tool call(s): ['run_shell_command']
+2026-08-27 01:15:36,781 [INFO] MainProcess: run_agent: spawning external tool 'run_shell_command' (id=cZhUJzKOCiu0M9Mi0h7RXmO2uZKESvL8) | timeout=30s args={'cmd': "search_books 'cocktail books'"}
+2026-08-27 01:15:36,811 [INFO] MainProcess: run_agent: worker process started for 'run_shell_command' (worker_pid=35484)
+2026-08-27 01:15:37,860 [INFO] MainProcess: run_agent: tool 'run_shell_command' finished | output_len=70
+2026-08-27 01:15:37,862 [INFO] MainProcess: run_agent: turn 10/50 | messages=27
+2026-08-27 01:15:37,863 [INFO] MainProcess: [chat] START buffer_id=OsmdBfMj model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:16:19,620 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:16:19,621 [INFO] MainProcess: retriving_pool: dispatching 1 task(s) across up to all worker(s).
+2026-08-27 01:16:29,345 [INFO] SpawnPoolWorker-4: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=jmJqdM91
+2026-08-27 01:16:32,189 [INFO] SpawnPoolWorker-4: [persistent] DONE collection='base' matched=3 mid=jmJqdM91
+2026-08-27 01:16:32,280 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 0 failed, out of 1 task(s).
+2026-08-27 01:16:37,286 [INFO] MainProcess: run_agent: starting | model='minicpm-v4.5:8b' max_turns=50 tools=10 skills=1
+2026-08-27 01:16:37,287 [INFO] MainProcess: run_agent: turn 1/50 | messages=9
+2026-08-27 01:16:37,293 [INFO] MainProcess: [chat] START buffer_id=sinpMrbr model='minicpm-v4.5:8b' base_url='https://increases-composer-counted-eyes.trycloudflare.com/v1'
+2026-08-27 01:28:04,521 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:28:04,522 [INFO] MainProcess: retriving_pool: dispatching 1 task(s) across up to all worker(s).
+2026-08-27 01:28:16,771 [INFO] SpawnPoolWorker-1: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=EqsQxu2U
+2026-08-27 01:28:20,437 [INFO] SpawnPoolWorker-1: [persistent] DONE collection='base' matched=3 mid=EqsQxu2U
+2026-08-27 01:28:20,479 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 0 failed, out of 1 task(s).
+2026-08-27 01:30:13,019 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:30:13,020 [INFO] MainProcess: retriving_pool: dispatching 1 task(s) across up to all worker(s).
+2026-08-27 01:30:24,469 [INFO] SpawnPoolWorker-4: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=KY9uG9I6
+2026-08-27 01:30:53,922 [INFO] SpawnPoolWorker-4: [persistent] DONE collection='base' matched=3 mid=KY9uG9I6
+2026-08-27 01:30:53,960 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 0 failed, out of 1 task(s).
+2026-08-27 01:31:35,912 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:31:35,912 [INFO] MainProcess: retriving_pool: dispatching 1 task(s) across up to all worker(s).
+2026-08-27 01:31:46,061 [INFO] SpawnPoolWorker-2: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=wds0hM9s
+2026-08-27 01:31:50,957 [INFO] SpawnPoolWorker-2: [persistent] DONE collection='base' matched=3 mid=wds0hM9s
+2026-08-27 01:31:50,999 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 0 failed, out of 1 task(s).
+2026-08-27 01:37:25,260 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:37:25,261 [INFO] MainProcess: retriving_pool: dispatching 1 task(s) across up to all worker(s).
+2026-08-27 01:37:36,368 [INFO] SpawnPoolWorker-2: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=d6sy0tHL
+2026-08-27 01:37:39,751 [INFO] SpawnPoolWorker-2: [persistent] DONE collection='base' matched=3 mid=d6sy0tHL
+2026-08-27 01:37:39,788 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 0 failed, out of 1 task(s).
+2026-08-27 01:38:15,637 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:38:15,638 [INFO] MainProcess: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 01:38:25,788 [INFO] SpawnPoolWorker-4: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=6PBXawnR
+2026-08-27 01:38:25,835 [INFO] SpawnPoolWorker-3: [persistent] START query='tell me about cocktail books' collection='OS' path='TARS_DB' mid=1DcvgyoA
+2026-08-27 01:38:26,355 [ERROR] SpawnPoolWorker-3: [persistent] FAILED collection='OS' path='TARS_DB' error=Collection [OS] does not exist
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retrive.py", line 153, in chroma_db_persistent
+    collec = client.get_collection(name=collection_name, embedding_function=built_ef)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/client.py", line 260, in get_collection
+    model = self._server.get_collection(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/rust.py", line 272, in get_collection
+    collection = self.bindings.get_collection(name, tenant, database)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+chromadb.errors.NotFoundError: Collection [OS] does not exist
+2026-08-27 01:38:28,316 [INFO] SpawnPoolWorker-4: [persistent] DONE collection='base' matched=3 mid=6PBXawnR
+2026-08-27 01:38:28,348 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 1 failed, out of 2 task(s).
+2026-08-27 01:46:07,665 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:46:07,687 [INFO] MainProcess: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 01:46:17,838 [INFO] SpawnPoolWorker-3: [persistent] START query='tell me about cocktail books' collection='OS' path='TARS_DB' mid=7rR87mY9
+2026-08-27 01:46:17,837 [INFO] SpawnPoolWorker-4: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=oRjq2xoC
+2026-08-27 01:46:19,643 [ERROR] SpawnPoolWorker-3: [persistent] FAILED collection='OS' path='TARS_DB' error=Collection [OS] does not exist
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retrive.py", line 153, in chroma_db_persistent
+    collec = client.get_collection(name=collection_name, embedding_function=built_ef)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/client.py", line 260, in get_collection
+    model = self._server.get_collection(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/rust.py", line 272, in get_collection
+    collection = self.bindings.get_collection(name, tenant, database)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+chromadb.errors.NotFoundError: Collection [OS] does not exist
+2026-08-27 01:47:05,931 [INFO] SpawnPoolWorker-4: [persistent] DONE collection='base' matched=3 mid=oRjq2xoC
+2026-08-27 01:47:05,962 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 1 failed, out of 2 task(s).
+2026-08-27 01:48:18,889 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:48:18,890 [INFO] MainProcess: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 01:48:30,211 [INFO] SpawnPoolWorker-1: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=GofbOQFP
+2026-08-27 01:48:30,248 [INFO] SpawnPoolWorker-4: [persistent] START query='tell me about cocktail books' collection='OS' path='TARS_DB' mid=VdAr5g0r
+2026-08-27 01:48:30,808 [ERROR] SpawnPoolWorker-4: [persistent] FAILED collection='OS' path='TARS_DB' error=Collection [OS] does not exist
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retrive.py", line 153, in chroma_db_persistent
+    collec = client.get_collection(name=collection_name, embedding_function=built_ef)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/client.py", line 260, in get_collection
+    model = self._server.get_collection(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/rust.py", line 272, in get_collection
+    collection = self.bindings.get_collection(name, tenant, database)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+chromadb.errors.NotFoundError: Collection [OS] does not exist
+2026-08-27 01:48:52,893 [INFO] SpawnPoolWorker-1: [persistent] DONE collection='base' matched=3 mid=GofbOQFP
+2026-08-27 01:48:52,921 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 1 failed, out of 2 task(s).
+2026-08-27 01:54:12,079 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 01:54:12,080 [INFO] MainProcess: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 01:54:21,571 [INFO] SpawnPoolWorker-3: [persistent] START query='tell me about cocktail books' collection='OS' path='TARS_DB' mid=NapwUAjr
+2026-08-27 01:54:21,587 [INFO] SpawnPoolWorker-1: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=AV86NiTy
+2026-08-27 01:54:22,112 [ERROR] SpawnPoolWorker-3: [persistent] FAILED collection='OS' path='TARS_DB' error=Collection [OS] does not exist
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retrive.py", line 153, in chroma_db_persistent
+    collec = client.get_collection(name=collection_name, embedding_function=built_ef)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/client.py", line 260, in get_collection
+    model = self._server.get_collection(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/rust.py", line 272, in get_collection
+    collection = self.bindings.get_collection(name, tenant, database)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+chromadb.errors.NotFoundError: Collection [OS] does not exist
+2026-08-27 01:54:28,137 [INFO] SpawnPoolWorker-1: [persistent] DONE collection='base' matched=3 mid=AV86NiTy
+2026-08-27 01:54:28,168 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 1 failed, out of 2 task(s).
+2026-08-27 02:00:22,943 [INFO] MainProcess: retriving_pool START query='tell me about cocktail books' locations_count=1 processes=None
+2026-08-27 02:00:22,965 [INFO] MainProcess: retriving_pool: dispatching 2 task(s) across up to all worker(s).
+2026-08-27 02:00:32,912 [INFO] SpawnPoolWorker-2: [persistent] START query='tell me about cocktail books' collection='base' path='TARS_DB' mid=12MAETC8
+2026-08-27 02:00:32,918 [INFO] SpawnPoolWorker-4: [persistent] START query='tell me about cocktail books' collection='OS' path='TARS_DB' mid=ljho91ii
+2026-08-27 02:00:35,099 [ERROR] SpawnPoolWorker-4: [persistent] FAILED collection='OS' path='TARS_DB' error=Collection [OS] does not exist
+Traceback (most recent call last):
+  File "/media/loki/HDD/System64/projects/in_development/TARS/fluid/vector_retrive/retrive.py", line 153, in chroma_db_persistent
+    collec = client.get_collection(name=collection_name, embedding_function=built_ef)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/client.py", line 260, in get_collection
+    model = self._server.get_collection(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/loki/HDD/System64/projects/in_development/TARS/.venv/lib/python3.12/site-packages/chromadb/api/rust.py", line 272, in get_collection
+    collection = self.bindings.get_collection(name, tenant, database)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+chromadb.errors.NotFoundError: Collection [OS] does not exist
+2026-08-27 02:00:48,984 [INFO] SpawnPoolWorker-2: [persistent] DONE collection='base' matched=3 mid=12MAETC8
+2026-08-27 02:00:49,022 [INFO] MainProcess: retriving_pool DONE: 1 succeeded, 1 failed, out of 2 task(s).
