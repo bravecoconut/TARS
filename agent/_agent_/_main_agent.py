@@ -6,7 +6,9 @@ from agent.system.configurations.configs.settings import ALL_TOOLS
 import os
 from dotenv import load_dotenv
 import json
-
+import asyncio
+import queue as sync_queue
+import threading
 load_dotenv()
 
 from agent.system.configurations.configs.open_configs import (
@@ -42,17 +44,52 @@ class _Main_Agent:
         print(1)
         time.sleep(5)
 
-    def events(self):
+    async def events(self):
+        """
+        Async version of the agent event stream.
+
+        The actual agent loop (self.ri.run_agent) runs on ONE dedicated
+        background thread for the lifetime of this call. That thread can
+        block freely (network calls, multiprocessing Queue.get(), etc.)
+        without ever freezing the main event loop — so other sessions'
+        code, and this session's own SSE/queue delivery, stay responsive
+        the whole time.
+        """
         # self.ri._debug_agent()
-        yield from self.ri.run_agent(
-            base_url=self._user["base_url"],
-            api_key=self._user["api_key"],
-            model=self._user["model"],
-            tool_choice=TOOL_CHOICE,
-            timeout=int(self._user["timeout"]),
-            max_retires=int(self._user["max_retries"]),
-            http_client=HTTP_CLIENT,
-            default_headers=DEFAULT_HEADERS,
-            max_complition_tokens=int(self._user["max_completion_tokens"]),
-            temperature=float(tone_temp()),
-        )
+        thread_queue = sync_queue.Queue()
+
+        def _blocking_produce():
+            try:
+                for event in self.ri.run_agent(
+                    base_url=self._user["base_url"],
+                    api_key=self._user["api_key"],
+                    model=self._user["model"],
+                    tool_choice=TOOL_CHOICE,
+                    timeout=int(self._user["timeout"]),
+                    max_retires=int(self._user["max_retries"]),
+                    http_client=HTTP_CLIENT,
+                    default_headers=DEFAULT_HEADERS,
+                    max_complition_tokens=int(self._user["max_completion_tokens"]),
+                    temperature=float(tone_temp()),
+                ):
+                    thread_queue.put(event)
+            except Exception as e:
+                thread_queue.put(e)  # let the consumer side see and raise it
+            finally:
+                thread_queue.put(None)  # sentinel — signals "no more events"
+
+        # Starts running immediately, on its own thread.
+        thread = threading.Thread(target=_blocking_produce, daemon=True)
+        thread.start()
+
+        loop = asyncio.get_running_loop()
+        while True:
+            item = await loop.run_in_executor(None, thread_queue.get)
+
+            if item is None:
+                break
+
+            if isinstance(item, Exception):
+                raise item
+
+            yield item

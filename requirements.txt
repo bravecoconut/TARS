@@ -1,4 +1,11 @@
 openai
 chromadb
-sentence_transformers
+sentence-transformers
 quart
+quart-cors
+motor
+beanie
+pymongo
+requests
+python-dotenv
+pydantic

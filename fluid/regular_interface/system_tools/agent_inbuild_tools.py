@@ -95,7 +95,7 @@ TOOL_FOR_TOOL = [
                     },
                     "_tool_comment": {
                         "type": "string",
-                        "description": "describe what you are doing or why you wants to run it [under 3-10 words].",
+                        "description": "describe what you are doing and why you are doing or why you wants to run it [under 15-20 words].",
                     },
                 },
                 "required": ["next_timeout_window"],

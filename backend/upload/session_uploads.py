@@ -3,7 +3,7 @@ from pathlib import Path
 from utils import r_h
 from models.sessions import Sessions
 from beanie import PydanticObjectId
-
+import traceback
 
 async def create_new_session(name=None):
     try:
@@ -18,7 +18,7 @@ async def create_new_session(name=None):
         return r_h(False, "Error occured when creating a new session", str(e))
 
 
-async def create_new_message(session_id, message):
+async def create_new_message(session_id:str, message:dict):
     try:
         session = await Sessions.get(session_id)
         session.messages.append(message)
@@ -26,6 +26,7 @@ async def create_new_message(session_id, message):
 
         return r_h(True, "new message added", str(_result))
     except Exception as e:
+        traceback.print_exc()
         return r_h(False, "Error occured when adding a new message", str(e))
 
 
@@ -47,16 +48,14 @@ if __name__ == "__main__":
 
     async def main():
         await init_db()
-        result = await add_new_path(
-            "6a8f0e7690b134d8503f57b5",
-            # {
-            #     "role": "assistant",
-            #     "content": "how can i assist you today",
-            #     "created": "",
-            # },
-            "sdasdas"
+        result = await create_new_message(
+            "6a8f253313f20d7c69a7a37b",
+            {
+                "role": "assistant",
+                "content": "how can i assist you today",
+                "created": "",
+            },
         )
-        # result = await create_new_session(name="test")
         print(result)
 
     asyncio.run(main())

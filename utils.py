@@ -1,4 +1,3 @@
-
 import os
 import uuid
 import json
@@ -8,6 +7,35 @@ from agent.system.configurations.configs.skills import (
 )
 import chromadb
 
+def make_tool_termination_message_before(tool_call_id):
+    """
+    Send this the MOMENT termination is requested — before you know
+    whether the kill actually succeeded yet.
+    """
+    return {
+        "role": "tool",
+        "tool_call_id": tool_call_id,
+        "content": (
+            f"they has requested to terminate this tool call (ID: {tool_call_id}). "
+            "A stop signal has been sent, but completion is not yet confirmed. "
+            "The tool may still finish normally, or it may stop unexpectedly if the "
+            "termination takes effect."
+        ),
+    }
+
+
+def make_tool_termination_message_after(tool_call_id):
+    """
+    Send this AFTER you've confirmed the process is actually gone —
+    e.g. after polling and finding it no longer exists.
+    """
+    return {
+        "role": "tool",
+        "tool_call_id": tool_call_id,
+        "content": (
+            f"they don't wants this tool call to be run, that's why they cancelled this tool call."
+        ),
+    }
 
 def r_h(status=None, comment=None, data=None):
     return {
@@ -68,7 +96,6 @@ def format_available(path):
 
     except Exception as e:
         return r_h(False, "something went wrong while validating file", str(e))
-
 
 
 def _find_safe_end(text, start, end):

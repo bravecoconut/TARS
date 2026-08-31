@@ -1,10 +1,18 @@
 from agent._agent_._main_agent import _Main_Agent
 import uuid
-from utils import r_h
+from utils import (
+    r_h,
+    make_tool_termination_message_after,
+    make_tool_termination_message_before,
+)
 from backend.upload.session_uploads import create_new_message
 from db import init_db
 import time
 import traceback
+import os
+import signal
+import asyncio
+
 
 class Agents:
     def __init__(self, create_message):
@@ -20,6 +28,9 @@ class Agents:
                 message=message,
             )
 
+            if not _save_["status"]:
+                return r_h(False, "can't save message", _save_)
+
             return r_h(True, "message saved", _save_)
         except Exception as e:
             return r_h(
@@ -27,44 +38,78 @@ class Agents:
                 "can't save message",
             )
 
+    async def _save_res_con(self, event, session_id):
+        try:
+            if self.last_reasoning_buffer:
+                new_message = {
+                    "role": "_assistant",
+                    "_agent_reasoning": self.last_reasoning_buffer,
+                    "turn": event["turn"],
+                    "created": time.time(),
+                }
+
+                _save_reasoning = await self._save_in_db(
+                    message=new_message,
+                    session_id=session_id,
+                )
+                self.last_reasoning_buffer = ""
+
+                if not _save_reasoning["status"]:
+                    return r_h(False, "can't save reasoning", _save_reasoning)
+
+            if self.last_content_buffer:
+                new_message = {
+                    "role": "assistant",
+                    "content": self.last_content_buffer,
+                    "turn": event["turn"],
+                    "created": time.time(),
+                }
+
+                _save_content = await self._save_in_db(
+                    message=new_message,
+                    session_id=session_id,
+                )
+                self.last_content_buffer = ""
+
+                if not _save_content["status"]:
+                    return r_h(False, "can't save content", _save_content)
+            return r_h(True, "every thing works fine")
+        except Exception as e:
+            return r_h(False, "something went wrong", str(e))
+
+    def clear_an_agent(self, session_id):
+        try:
+            r = self.our_agents.pop(session_id, None)
+            return r_h(True, "agent cleared with events histories", r)
+        except Exception as e:
+            return r_h(False, "something goes unexpected", e)
+
     async def _event_viewer(self, event, session_id):
         try:
             if event["type"] == "reasoning":
                 self.last_reasoning_buffer += event["reasoning"]
+                return r_h(True, "every thing works fine")
+
             elif event["type"] == "content":
                 self.last_content_buffer += event["content"]
-            elif event["type"] == "tool_start":
-                if self.last_reasoning_buffer:
-                    new_message = {
-                        "role": "_assistant",
-                        "_agent_reasoning": self.last_reasoning_buffer,
-                        "turn": event["turn"],
-                        "created": time.time(),
-                    }
+                return r_h(True, "every thing works fine")
 
-                    _save_reasoning = await self._save_in_db(
-                        message=new_message,
-                        session_id=session_id,
-                    )
+            elif (
+                (event["type"] == "tool_start")
+                or (event["type"] == "tool_update")
+                or (event["type"] == "tool_timeout")
+                or (event["type"] == "tool_done")
+                or (event["type"] == "tool_error")
+                or (event["type"] == "done")
+                or (event["type"] == "error")
+            ):
 
-                    if not _save_reasoning["status"]:
-                        return r_h(False, "can't save reasoning", _save_reasoning)
+                _save_res_con_ = await self._save_res_con(
+                    event=event, session_id=session_id
+                )
 
-                if self.last_content_buffer:
-                    new_message = {
-                        "role": "assistant",
-                        "content": self.last_content_buffer,
-                        "turn": event["turn"],
-                        "created": time.time(),
-                    }
-
-                    _save_content = await self._save_in_db(
-                        message=new_message,
-                        session_id=session_id,
-                    )
-
-                    if not _save_content["status"]:
-                        return r_h(False, "can't save content", _save_content)
+                if not _save_res_con_["status"]:
+                    return r_h(False, "can't save event", _save_res_con_)
 
                 # saving entire event so we can use any of the pair in UI/UX
                 new_event = {"event": event, "created": time.time()}
@@ -77,8 +122,24 @@ class Agents:
                     return r_h(False, "can't save event", _save_event)
 
                 return r_h(True, "every thing works fine")
+            else:
+                return r_h(False, "something went wrong", event)
+
         except Exception as e:
-            return r_h(False, "something went wrong", e)
+            return r_h(False, "something went wrong", str(e))
+
+    def _add_message_in_agent(self, message: dict, session_id: str):
+        try:
+            self.our_agents[session_id]["agent"].ri.agent_messages.append(message)
+            return r_h(
+                True,
+                "message added",
+                self.our_agents[session_id]["agent"].ri.agent_messages,
+            )
+        except Exception as e:
+            return r_h(
+                False, "something went wrong while adding message in agent", str(e)
+            )
 
     def create_agent(self, messages, session_id):
         try:
@@ -89,116 +150,103 @@ class Agents:
                 meta={"session_id": session_id},
             )
             self.our_agents[session_id] = {"agent": _new_agent}
+            self.our_agents[session_id]["events_history"] = []
+            self.our_agents[session_id]["queue"] = asyncio.Queue()
+            self.our_agents[session_id]["running"] = False
+
             return r_h(True, "agent created! ready to work")
         except Exception as e:
-            return r_h(False, "can't create agent")
+            return r_h(False, "can't create agent", str(e))
 
     async def start_agent(self, session_id):
         try:
-            for event in self.our_agents[session_id]["agent"].events():
-                yield r_h(True, "get agent event", event)
+            if not self.our_agents.get(session_id):
+                return r_h(False, "session agent not exist")
+                
+
+            self.our_agents[session_id]["running"] = True
+            async for event in self.our_agents[session_id]["agent"].events():
+
+                await self.our_agents[session_id]["queue"].put(r_h(True, "get event", event))
+                self.our_agents[session_id]["events_history"].append(event)
+
                 view = await self._event_viewer(
                     event=event,
                     session_id=session_id,
                 )
                 if not view["status"]:
-                    yield r_h(False, "something went wrong", view)
-                    return
+                    await self.our_agents[session_id]["queue"].put(
+                        r_h(False, "something went wrong", view)
+                    )
+
+            await self.our_agents[session_id]["queue"].put(
+                r_h(
+                    True,
+                    "agent completed",
+                    self.our_agents[session_id]["events_history"],
+                )
+            )
+
+            await self.our_agents[session_id]["queue"].put(None)  # finish
+
+            self.our_agents[session_id]["running"] = False
 
         except Exception as e:
-            traceback.print_exc() 
-            yield r_h(False, "can't start agent", e)
-            return
+            traceback.print_exc()
+            await self.our_agents[session_id]["queue"].put(
+                r_h(False, "can't start agent", str(e))
+            )
 
+    async def terminate_agent(self, session_id):
+        try:
+            if not self.our_agents.get(session_id):
+                return r_h(False, "session agent not exist")
 
-if __name__ == "__main__":
-    from db import init_db
-    import asyncio
-    import time
-    from backend.upload.session_uploads import create_new_message
-    import json
-    from z_ignore.ignores.one.z import messages
+            _terminate = self.our_agents[session_id]["agent"].ri.stop_all()
 
-    async def main():
-        agents = Agents(create_message=create_new_message)
-        await init_db()
-        s1 = "6a8f252013f20d7c69a7a378"
-        s2 = "6a8f252113f20d7c69a7a379"
-        s3 = "6a8f252113f20d7c69a7a37a"
-
-        agents.create_agent(
-            messages=messages,
-            session_id=s1,
-        )
-        agents.create_agent(
-            messages=messages,
-            session_id=s2,
-        )
-        agents.create_agent(
-            messages=messages,
-            session_id=s3,
-        )
-
-        print("=" * 15, "our agents", "=" * 15)
-        print(agents.our_agents)
-        print("=" * 42)
-
-        async for event in agents.start_agent(session_id=s1):
-            if not event["status"]:
-                print(event)
-            etype = event["type"]
-
-            if etype == "content":
-                print(event["content"], end="", flush=True)
-
-            elif etype == "reasoning":
-                print(event["reasoning"], end="", flush=True)
-
-            elif etype == "tool_start":
-                tc = event["tool_call"]
-                print(
-                    f"\n🔧 TOOL START: {tc['tool_name']}({tc['tool_args']}) [timeout={tc['timeout']}s]"
+            if not _terminate["status"]:
+                return r_h(
+                    False,
+                    "can't stop agent, agent and its process are still running",
+                    _terminate,
                 )
-                with open("z_ignore/ignores/one/u.py", "a") as file:
-                    file.write(str(event))
-            elif etype == "tool_update":
-                tc = event["tool_call"]
-                reason = tc.get("result", "")[:100] if tc.get("result") else ""
-                print(f"   ↻ UPDATE: pid={tc['process_id']} | {reason}")
-                with open("z_ignore/ignores/one/u.py", "a") as file:
-                    file.write(str(event))
-            elif etype == "tool_timeout":
-                tc = event["tool_call"]
-                print(
-                    f"\n   ⏰ TIMEOUT: {tc['tool_name']} (pid={tc['process_id']}) — asking agent..."
+            return r_h(True, "agent terminated", _terminate)
+
+        except Exception as e:
+            traceback.print_exc()
+            return r_h(False, "can't stop agent", str(e))
+
+    async def terminate_process(self, session_id, pid, tool_call_id):
+        try:
+            if not self.our_agents.get(session_id):
+                return r_h(False, "session agent not exist")
+
+            kill_message_after = make_tool_termination_message_after(
+                tool_call_id=tool_call_id
+            )
+
+            self._add_message_in_agent(kill_message_after, session_id=session_id)
+            os.kill(pid, signal.SIGKILL)
+            # add a flag in message before saving
+            kill_message_after["_terminated"] = True
+            _save_killing = await self._save_in_db(
+                message=kill_message_after,
+                session_id=session_id,
+            )
+
+            # poll briefly to confirm it's actually dead
+            await asyncio.sleep(0.1)
+            try:
+                os.kill(pid, 0)  # signal 0 = just checks liveness, doesn't kill
+                return r_h(
+                    False,
+                    "something went wrong while terminating process, process is still alive",
                 )
-                with open("z_ignore/ignores/one/u.py", "a") as file:
-                    file.write(str(event))
-            elif etype == "tool_done":
-                tc = event["tool_call"]
-                result_preview = str(tc.get("result", ""))[:200]
-                print(f"\n   ✓ DONE: {tc['tool_name']} → {result_preview}")
-                with open("z_ignore/ignores/one/u.py", "a") as file:
-                    file.write(str(event))
-            elif etype == "tool_error":
-                tc = event["tool_call"]
-                print(f"\n   ✗ ERROR: {tc['tool_name']} → {tc.get('result', '')[:200]}")
-                with open("z_ignore/ignores/one/u.py", "a") as file:
-                    file.write(str(event))
-            elif etype == "done":
-                print(f"\n\n--- DONE (turn {event['turn']}) ---")
-                if event.get("content"):
-                    print(f"    {event['content']}")
-                with open("z_ignore/ignores/one/u.py", "a") as file:
-                    file.write(str(event))
-            elif etype == "error":
-                print(f"\n!!! ERROR: {event['content']}")
-                print(json.dumps(event, indent=2, default=str))
+            except ProcessLookupError:
+                pass
 
-            else:
-                # Catch-all for any other event types
-                print(json.dumps(event, indent=2, default=str))
+            if not _save_killing["status"]:
+                return r_h(False, "can't save killing", _save_killing)
 
-        print("\n✅ Agent run complete.")
-
-    asyncio.run(main())
+        except Exception as e:
+            return r_h(False, "something went wrong while terminating process", str(e))

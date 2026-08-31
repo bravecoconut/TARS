@@ -1,7 +1,7 @@
 from quart import Blueprint, request, jsonify
 from backend.upload.session_uploads import create_new_session, create_new_message
 from backend.update.session import change_name, toggle_pin, update_last_user_message
-from backend.gather.session import get_session, check_session
+from backend.gather.session import get_session, check_session, get_all_sessions
 from backend.delete.session import delete_session
 from utils import get_sec_key, r_h, validate_sec_key
 import json
@@ -75,7 +75,7 @@ async def _delete_session():
                 )
             )
 
-        return jsonify({"main_result":_result, "vector_clear":_clear_vectors})
+        return jsonify({"main_result": _result, "vector_clear": _clear_vectors})
     except Exception as e:
         return jsonify(
             r_h(False, "something went wrong while deleting session", str(e))
@@ -206,3 +206,22 @@ async def _get_session():
         return jsonify(_result)
     except Exception as e:
         return jsonify(r_h(False, "something went wrong while getting session", str(e)))
+
+
+@sessions_bp.route("/get_all_sessions", methods=["POST"])
+async def _get_all_sessions():
+    try:
+        # validate sec key
+        sec_key = validate_sec_key(sec_key=request.cookies.get("sec_key"))
+        if not sec_key["status"]:
+            return jsonify(sec_key)
+
+        # main logic
+        data = await request.get_json(silent=True) or {}
+        _start = data.get("start")
+        _end = data.get("end")
+
+        _result = await get_all_sessions(start=_start, end=_end)
+        return jsonify(_result)
+    except Exception as e:
+        return jsonify(r_h(False, "something went wrong while getting sessions", str(e)))

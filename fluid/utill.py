@@ -526,7 +526,7 @@ def convert_to_openai_tools(raw_tools_list: list[dict]) -> list[dict]:
 
         properties["_tool_comment"] = {
             "type": "string",
-            "description": "describe what you are doing or why you wants to run it [under 3-10 words].",
+            "description": "describe what you are doing and why you are doing or why you wants to run it [under 15-20 words].",
         }
 
         timeout_note = _build_timeout_note(skill.get("usually_takes"))

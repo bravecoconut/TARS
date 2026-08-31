@@ -1,11 +1,15 @@
-from pymongo import AsyncMongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 from beanie import init_beanie
 from models.sessions import Sessions
 
+_client = None
 
 async def init_db():
-    client = AsyncMongoClient("mongodb://localhost:27017")
+    global _client
+    if _client is not None:
+        return  # Already initialized
+    _client = AsyncIOMotorClient("mongodb://localhost:27017")
     await init_beanie(
-        database=client.TARS,
+        database=_client.TARS,
         document_models=[Sessions],
     )

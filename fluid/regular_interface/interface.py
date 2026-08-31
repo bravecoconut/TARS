@@ -89,7 +89,11 @@ class RegularInterface:
             if SKILL_MANIPULATION_TOOLS:
                 self.openai_agent_tools += SKILL_MANIPULATION_TOOLS
 
-        if self.default_skills and messages and isinstance(messages[-1].get("content"), str):
+        if (
+            self.default_skills
+            and messages
+            and isinstance(messages[-1].get("content"), str)
+        ):
             self.raw_contexts, self.contexts = retriving_pool(
                 query=messages[-1].get("content"),
                 locations=self.default_skills,
@@ -348,18 +352,14 @@ class RegularInterface:
                     raw = chunk["chunk"]
 
                     # raw can be a Pydantic model or already a dict
-                    my_chunk = (
-                        raw.model_dump() if hasattr(raw, "model_dump") else raw
-                    )
+                    my_chunk = raw.model_dump() if hasattr(raw, "model_dump") else raw
                     choice = my_chunk["choices"][0]
                     delta = choice.get("delta") or {}
 
                     # --- content token ---
                     if delta.get("content"):
                         self.content_buffer += delta["content"]
-                        yield _make_event(
-                            "content", turn, content=delta["content"]
-                        )
+                        yield _make_event("content", turn, content=delta["content"])
 
                     # --- reasoning token ---
                     if delta.get("reasoning"):
@@ -382,7 +382,8 @@ class RegularInterface:
                     exc_info=True,
                 )
                 yield _make_event(
-                    "error", turn,
+                    "error",
+                    turn,
                     content=f"Stream processing failed: {e}",
                 )
                 return
@@ -469,9 +470,7 @@ class RegularInterface:
                         {
                             "role": "assistant",
                             "content": (
-                                self.content_buffer
-                                if self.content_buffer
-                                else None
+                                self.content_buffer if self.content_buffer else None
                             ),
                             "tool_calls": assistant_tool_calls_msg,
                         }
@@ -527,9 +526,7 @@ class RegularInterface:
                             status="started",
                         )
 
-                        result_str = self._handle_inline_tool(
-                            tc_name, tc_args or {}
-                        )
+                        result_str = self._handle_inline_tool(tc_name, tc_args or {})
 
                         logger.info(
                             f"run_agent: inline tool '{tc_name}' done | "
@@ -673,9 +670,7 @@ class RegularInterface:
                                         f"'{tc_name}' (pid={u_pid}), "
                                         f"requesting decision"
                                     )
-                                    msg_type, task_id, prompt = (
-                                        self.in_q.get()
-                                    )
+                                    msg_type, task_id, prompt = self.in_q.get()
                                     if msg_type != "need_input":
                                         logger.error(
                                             f"run_agent: unexpected msg_type "
@@ -728,9 +723,7 @@ class RegularInterface:
                                                 timeout=timeout,
                                                 max_retires=max_retires,
                                                 http_client=http_client,
-                                                default_headers=(
-                                                    default_headers
-                                                ),
+                                                default_headers=(default_headers),
                                                 temperature=temperature,
                                             )
                                         )
@@ -781,9 +774,7 @@ class RegularInterface:
                         )
 
                     # Build the tool result to feed back to the LLM.
-                    tool_output = (
-                        final_stdout or final_stderr or "(no output)"
-                    )
+                    tool_output = final_stdout or final_stderr or "(no output)"
 
                     logger.info(
                         f"run_agent: tool '{tc_name}' finished | "
@@ -821,8 +812,7 @@ class RegularInterface:
 
             # Any other unknown finish_reason — log and treat as done.
             logger.warning(
-                f"run_agent: unknown finish_reason={finish_reason!r} "
-                f"at turn {turn}"
+                f"run_agent: unknown finish_reason={finish_reason!r} " f"at turn {turn}"
             )
             yield _make_event(
                 "done",
@@ -832,9 +822,7 @@ class RegularInterface:
             return
 
         # Reached max_turns without the model saying "stop".
-        logger.info(
-            f"run_agent: reached max_turns ({self.max_turns}), stopping"
-        )
+        logger.info(f"run_agent: reached max_turns ({self.max_turns}), stopping")
         yield _make_event(
             "done",
             self.max_turns,
@@ -966,20 +954,14 @@ class RegularInterface:
                         return
 
                     raw = chunk["chunk"]
-                    my_chunk = (
-                        raw.model_dump()
-                        if hasattr(raw, "model_dump")
-                        else raw
-                    )
+                    my_chunk = raw.model_dump() if hasattr(raw, "model_dump") else raw
                     choice = my_chunk["choices"][0]
                     delta = choice.get("delta") or {}
 
                     # Stream content/reasoning to the caller so they
                     # see the agent thinking.
                     if delta.get("content"):
-                        yield _make_event(
-                            "content", turn, content=delta["content"]
-                        )
+                        yield _make_event("content", turn, content=delta["content"])
                     if delta.get("reasoning"):
                         yield _make_event(
                             "reasoning", turn, reasoning=delta["reasoning"]
@@ -991,17 +973,10 @@ class RegularInterface:
                     # Check if the model finished with a tool call.
                     finish = choice.get("finish_reason")
                     if finish == "tool_calls" and decision_tool_calls:
-                        comp = return_completed_tool_calls(
-                            decision_tool_calls
-                        )
+                        comp = return_completed_tool_calls(decision_tool_calls)
                         for tc in comp:
-                            if (
-                                tc["name"] == "tool_run_tool"
-                                and not tc["error"]
-                            ):
-                                val = tc["arguments"].get(
-                                    "next_timeout_window", 0
-                                )
+                            if tc["name"] == "tool_run_tool" and not tc["error"]:
+                                val = tc["arguments"].get("next_timeout_window", 0)
                                 try:
                                     self.next_input = int(float(val))
                                 except (ValueError, TypeError):
@@ -1056,8 +1031,7 @@ class RegularInterface:
         names return an error string instead.
         """
         logger.info(
-            f"_handle_inline_tool: dispatching '{tool_name}' "
-            f"with args={tool_args}"
+            f"_handle_inline_tool: dispatching '{tool_name}' " f"with args={tool_args}"
         )
         try:
             if tool_name == "add_new_skill":
@@ -1075,9 +1049,7 @@ class RegularInterface:
                 )
             else:
                 result = f"Unknown inline tool: {tool_name}"
-                logger.warning(
-                    f"_handle_inline_tool: unknown tool '{tool_name}'"
-                )
+                logger.warning(f"_handle_inline_tool: unknown tool '{tool_name}'")
             return result
         except Exception as e:
             logger.error(
@@ -1091,8 +1063,14 @@ class RegularInterface:
     # ------------------------------------------------------------------
     @staticmethod
     def _worker(
-        task_id, tool_name, tool_args, avail_tools, timeout,
-        in_q, out_q, update_q,
+        task_id,
+        tool_name,
+        tool_args,
+        avail_tools,
+        timeout,
+        in_q,
+        out_q,
+        update_q,
     ):
         """Runs in a child process: drives the start_process generator to
         completion and forwards every yielded update to update_q. When the
@@ -1158,20 +1136,33 @@ class RegularInterface:
 
         Safe to call from any thread.
         """
-        self._stopped = True
-        self._openai.stop_event.set()
+        try:
+            self._stopped = True
+            self._openai.stop_event.set()
 
-        for pid, proc in list(self._active_processes.items()):
-            try:
-                proc.terminate()
-                proc.wait(timeout=3)
-            except Exception:
+            for pid, proc in list(self._active_processes.items()):
                 try:
-                    proc.kill()
-                    proc.wait(timeout=2)
+                    proc.terminate()
+                    proc.wait(timeout=3)
                 except Exception:
-                    pass
-            self._active_processes.pop(pid, None)
+                    try:
+                        proc.kill()
+                        proc.wait(timeout=2)
+                    except Exception:
+                        pass
+                self._active_processes.pop(pid, None)
+
+            return {
+                "status": True,
+                "comment": "agent stopped",
+            }
+
+        except Exception as e:
+            return {
+                "status": False,
+                "comment": "something went wrong while stopping all",
+                "data": e,
+            }
 
     # ------------------------------------------------------------------
     # terminate_process — kill one specific subprocess by PID
