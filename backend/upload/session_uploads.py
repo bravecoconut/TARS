@@ -20,7 +20,11 @@ async def create_new_session(name=None):
 
 async def create_new_message(session_id:str, message:dict):
     try:
-        session = await Sessions.get(session_id)
+        try:
+            session = await Sessions.get(session_id)
+        except Exception as e:
+            return r_h(False, "no session exists with that session id or something went wrong", session_id)
+
         session.messages.append(message)
         _result = await session.save()
 

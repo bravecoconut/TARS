@@ -106,7 +106,7 @@ async def update_srcf_threshold():
             or isinstance(_new_srcf_threshold, bool)
             or _new_srcf_threshold <= 0
         ):
-            return r_h(False, "srcf threshold must be `int` and greater than zero")
+            return r_h(False, "srcf threshold must be `int` or `float` and greater than zero")
 
         _result = set_srcf_threshold(new_srcf_threshold=_new_srcf_threshold)
         return jsonify(_result)

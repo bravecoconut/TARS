@@ -40,6 +40,18 @@ def set_model(model):
         return r_h(False, "model can't changed", {"error": e})
 
 
+def set_em_model(em_model):
+    try:
+        with open(USER_PATH) as file:
+            _user = json.load(file)
+        _user["embedding_model"] = em_model
+        with open(USER_PATH, "w") as file:
+            json.dump(_user, file, indent=4)
+        return r_h(True, "model changed")
+    except Exception as e:
+        return r_h(False, "model can't changed", {"error": e})
+
+
 def set_mct(mct):  # max_completion_tokens
     try:
         with open(USER_PATH) as file:

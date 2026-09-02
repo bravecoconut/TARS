@@ -15,7 +15,11 @@ async def change_name(session_id, new_name):
         session.name = str(new_name)
         _result = await session.save()
 
-        return r_h(True, "session name updated", str(_result))
+        return r_h(
+            True,
+            "session name updated",
+            _result.name,
+        )
     except Exception as e:
         return r_h(False, "Error occured when changing session name", str(e))
 
@@ -32,7 +36,11 @@ async def toggle_pin(session_id):
         session.pin = False if session.pin else True
         _result = await session.save()
 
-        return r_h(True, "pin toggled", str(_result))
+        return r_h(
+            True,
+            "pin toggled",
+            _result.pin,
+        )
     except Exception as e:
         return r_h(False, "Error occured when toggleing pin", str(e))
 
@@ -49,18 +57,26 @@ async def toggle_streaming(session_id):
         session.streaming = False if session.streaming else True
         _result = await session.save()
 
-        return r_h(True, "streaming toggled", str(_result))
+        return r_h(
+            True,
+            "streaming toggled",
+            _result.streaming,
+        )
     except Exception as e:
         return r_h(False, "Error occured when toggleing pin", str(e))
 
 
 async def update_last_user_message(session_id, new_message):
     try:
-        session = await Sessions.get(PydanticObjectId(session_id))
+        try:
+            session = await Sessions.get(PydanticObjectId(session_id))
+        except Exception as e:
+            return r_h(False, "no session exists with that session id or something went wrong", session_id)
+
         if session is None:
             return r_h(
                 False,
-                f"no post exists with '{session_id}'",
+                f"no session exists with '{session_id}'",
             )
 
         user_index, user_messages = None, None
@@ -73,7 +89,12 @@ async def update_last_user_message(session_id, new_message):
         del session.messages[user_index + 1 :]
         _result = await session.save()
 
-        return r_h(True, "last message changed", str(_result))
+        return r_h(
+            True,
+            "last message changed",
+            _result.messages[user_index]
+
+        )
     except Exception as e:
         return r_h(False, "Error occured when changing last message", str(e))
 
