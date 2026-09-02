@@ -39,7 +39,7 @@ async def startup():
 # temp
 @app.route("/")
 async def index():
-    return await send_from_directory(app.static_folder, "templates/index.html")
+    return await send_from_directory(app.static_folder, "templates/agents-test.html")
 
 
 if __name__ == "__main__":
