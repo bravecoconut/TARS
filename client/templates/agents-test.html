@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TARS — Agent API Tester</title>
+    <script src="../scripts/requests/_request_.js"></script>
+    <script src="../scripts/requests/_routes.js"></script>
+    <script src="../scripts/requests/session.js"></script>
+    <script src="../scripts/requests/message.js"></script>
+    <script src="../scripts/requests/client.js"></script>
+    <script src="../scripts/requests/srcf.js"></script>
+    <script src="../scripts/requests/others.js"></script>
+    <script src="../scripts/requests/ascii.js"></script>
+    <script src="../scripts/requests/agents.js"></script>
+    <script src="../scripts/requests/stream_events.js"></script>
+    <script src="../scripts/utils.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: monospace;
+            background: #111;
+            color: #ccc;
+            padding: 24px;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 18px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #888;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 24px 0 12px 0;
+        }
+
+        .section {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        input, textarea {
+            background: #222;
+            border: 1px solid #333;
+            color: #eee;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        input { width: 220px; }
+        textarea { width: 100%; min-height: 60px; resize: vertical; }
+
+        button {
+            background: #2a2a2a;
+            color: #ddd;
+            border: 1px solid #444;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: monospace;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+        button:hover { background: #333; border-color: #555; }
+
+        button.danger { border-color: #633; color: #e66; }
+        button.danger:hover { background: #311; }
+
+        button.go { border-color: #363; color: #6e6; }
+        button.go:hover { background: #132; }
+
+        .output {
+            background: #0d0d0d;
+            border: 1px solid #222;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: #999;
+        }
+
+        label {
+            color: #777;
+            font-size: 12px;
+            min-width: 90px;
+        }
+
+        .fn-name {
+            color: #7af;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .stream-live {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #4e4;
+            border-radius: 50%;
+            margin-left: 6px;
+            animation: pulse 1s infinite;
+        }
+
+        .stream-dead {
+            background: #666;
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+
+<h1>TARS — Agent API Tester</h1>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Agents — No Params</h2>
+<!-- ═══════════════════════════════════════════ -->
+<div class="section">
+    <div class="fn-name">get_all_agents()</div>
+    <div class="row">
+        <button class="go" id="btn-get-all-agents" onclick="run_get_all_agents()">Run</button>
+    </div>
+    <div class="output" id="out-get-all-agents">—</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Agents — Session ID Required</h2>
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="section">
+    <div class="fn-name">get_an_agent(session_id)</div>
+    <div class="row">
+        <label>session_id</label>
+        <input type="text" id="in-get-an-agent-sid" placeholder="session_id">
+        <button class="go" id="btn-get-an-agent" onclick="run_get_an_agent()">Run</button>
+    </div>
+    <div class="output" id="out-get-an-agent">—</div>
+</div>
+
+<div class="section">
+    <div class="fn-name">get_event_history(session_id)</div>
+    <div class="row">
+        <label>session_id</label>
+        <input type="text" id="in-get-event-history-sid" placeholder="session_id">
+        <button class="go" id="btn-get-event-history" onclick="run_get_event_history()">Run</button>
+    </div>
+    <div class="output" id="out-get-event-history">—</div>
+</div>
+
+<div class="section">
+    <div class="fn-name">clear_agent(session_id)</div>
+    <div class="row">
+        <label>session_id</label>
+        <input type="text" id="in-clear-agent-sid" placeholder="session_id">
+        <button class="danger" id="btn-clear-agent" onclick="run_clear_agent()">Run</button>
+    </div>
+    <div class="output" id="out-clear-agent">—</div>
+</div>
+
+<div class="section">
+    <div class="fn-name">terminate_agent(session_id)</div>
+    <div class="row">
+        <label>session_id</label>
+        <input type="text" id="in-terminate-agent-sid" placeholder="session_id">
+        <button class="danger" id="btn-terminate-agent" onclick="run_terminate_agent()">Run</button>
+    </div>
+    <div class="output" id="out-terminate-agent">—</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Agents — Messages</h2>
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="section">
+    <div class="fn-name">add_message_in_agent(session_id, message)</div>
+    <div class="row">
+        <label>session_id</label>
+        <input type="text" id="in-add-msg-sid" placeholder="session_id">
+    </div>
+    <div class="row">
+        <label>message</label>
+    </div>
+    <div class="row">
+        <textarea id="in-add-msg-message" placeholder='{"role":"user", "content":"hello"}'></textarea>
+    </div>
+    <div class="row">
+        <button class="go" id="btn-add-msg" onclick="run_add_message_in_agent()">Run</button>
+    </div>
+    <div class="output" id="out-add-msg">—</div>
+</div>
+
+<div class="section">
+    <div class="fn-name">create_agent(session_id, messages)</div>
+    <div class="row">
+        <label>session_id</label>
+        <input type="text" id="in-create-agent-sid" placeholder="session_id">
+    </div>
+    <div class="row">
+        <label>messages</label>
+    </div>
+    <div class="row">
+        <textarea id="in-create-agent-messages" placeholder='JSON array, e.g. [{"role":"user","content":"hello"}]'></textarea>
+    </div>
+    <div class="row">
+        <button class="go" id="btn-create-agent" onclick="run_create_agent()">Run</button>
+    </div>
+    <div class="output" id="out-create-agent">—</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Agents — Fire & Control</h2>
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="section">
+    <div class="fn-name">fire_agent(session_id)</div>
+    <p style="color:#555;font-size:11px;margin-bottom:8px;">
+        Starts the agent. Use terminate_agent / terminate_process above to stop it.
+    </p>
+    <div class="row">
+        <label>session_id</label>
+        <input type="text" id="in-fire-agent-sid" placeholder="session_id">
+        <button class="go" id="btn-fire-agent" onclick="run_fire_agent()">Fire</button>
+    </div>
+    <div class="output" id="out-fire-agent">—</div>
+</div>
+
+<div class="section">
+    <div class="fn-name">terminate_process(session_id, pid, tool_call_id)</div>
+    <div class="row">
+        <label>session_id</label>
+        <input type="text" id="in-term-proc-sid" placeholder="session_id">
+    </div>
+    <div class="row">
+        <label>pid</label>
+        <input type="text" id="in-term-proc-pid" placeholder="pid">
+    </div>
+    <div class="row">
+        <label>tool_call_id</label>
+        <input type="text" id="in-term-proc-tcid" placeholder="tool_call_id">
+    </div>
+    <div class="row">
+        <button class="danger" id="btn-term-proc" onclick="run_terminate_process()">Terminate Process</button>
+    </div>
+    <div class="output" id="out-term-proc">—</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Stream Events</h2>
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="section">
+    <div class="fn-name">
+        stream_agent_events(session_id)
+        <span id="stream-indicator" class="stream-dead" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span>
+    </div>
+    <div class="row">
+        <label>session_id</label>
+        <input type="text" id="in-stream-sid" placeholder="session_id">
+        <button class="go" id="btn-stream-start" onclick="run_stream_start()">Start Stream</button>
+        <button class="danger" id="btn-stream-stop" onclick="run_stream_stop()">Stop Stream</button>
+    </div>
+    <div class="output" id="out-stream" style="max-height:400px;">—</div>
+</div>
+
+
+<script>
+    // ── helpers ──────────────────────────────────────────────
+
+    function out(id, data) {
+        const el = document.getElementById(id);
+        el.textContent = JSON.stringify(data, null, 2);
+    }
+
+    function appendOut(id, line) {
+        const el = document.getElementById(id);
+        if (el.textContent === "—") el.textContent = "";
+        el.textContent += line + "\n";
+        el.scrollTop = el.scrollHeight;
+    }
+
+
+    // ── get_all_agents ──────────────────────────────────────
+
+    async function run_get_all_agents() {
+        out("out-get-all-agents", "loading...");
+        const res = await get_all_agents();
+        out("out-get-all-agents", res);
+    }
+
+
+    // ── get_an_agent ────────────────────────────────────────
+
+    async function run_get_an_agent() {
+        const sid = document.getElementById("in-get-an-agent-sid").value;
+        out("out-get-an-agent", "loading...");
+        const res = await get_an_agent(sid);
+        out("out-get-an-agent", res);
+    }
+
+
+    // ── get_event_history ───────────────────────────────────
+
+    async function run_get_event_history() {
+        const sid = document.getElementById("in-get-event-history-sid").value;
+        out("out-get-event-history", "loading...");
+        const res = await get_event_history(sid);
+        out("out-get-event-history", res);
+    }
+
+
+    // ── clear_agent ─────────────────────────────────────────
+
+    async function run_clear_agent() {
+        const sid = document.getElementById("in-clear-agent-sid").value;
+        out("out-clear-agent", "loading...");
+        const res = await clear_agent(sid);
+        out("out-clear-agent", res);
+    }
+
+
+    // ── add_message_in_agent ────────────────────────────────
+
+    async function run_add_message_in_agent() {
+        const sid = document.getElementById("in-add-msg-sid").value;
+        const raw = document.getElementById("in-add-msg-message").value;
+        let msg;
+        try {
+            msg = JSON.parse(raw);
+        } catch (e) {
+            out("out-add-msg", { error: "invalid JSON in message field", detail: String(e) });
+            return;
+        }
+        out("out-add-msg", "loading...");
+        const res = await add_message_in_agent(sid, msg);
+        out("out-add-msg", res);
+    }
+
+
+    // ── create_agent ────────────────────────────────────────
+
+    async function run_create_agent() {
+        const sid = document.getElementById("in-create-agent-sid").value;
+        const raw = document.getElementById("in-create-agent-messages").value;
+        let messages;
+        try {
+            messages = JSON.parse(raw);
+        } catch (e) {
+            out("out-create-agent", { error: "invalid JSON in messages field", detail: String(e) });
+            return;
+        }
+        out("out-create-agent", "loading...");
+        const res = await create_agent(sid, messages);
+        out("out-create-agent", res);
+    }
+
+
+    // ── terminate_agent ─────────────────────────────────────
+
+    async function run_terminate_agent() {
+        const sid = document.getElementById("in-terminate-agent-sid").value;
+        out("out-terminate-agent", "loading...");
+        const res = await terminate_agent(sid);
+        out("out-terminate-agent", res);
+    }
+
+
+    // ── fire_agent ──────────────────────────────────────────
+
+    async function run_fire_agent() {
+        const sid = document.getElementById("in-fire-agent-sid").value;
+        out("out-fire-agent", "loading...");
+        const res = await fire_agent(sid);
+        out("out-fire-agent", res);
+    }
+
+
+    // ── terminate_process ───────────────────────────────────
+
+    async function run_terminate_process() {
+        const sid = document.getElementById("in-term-proc-sid").value;
+        const pid = Number(document.getElementById("in-term-proc-pid").value);
+        const tcid = document.getElementById("in-term-proc-tcid").value;
+        out("out-term-proc", "loading...");
+        const res = await terminate_process(sid, pid, tcid);
+        out("out-term-proc", res);
+    }
+
+
+    // ── stream_agent_events ─────────────────────────────────
+
+    let _streamAbort = null;
+
+    async function run_stream_start() {
+        const sid = document.getElementById("in-stream-sid").value;
+        const indicator = document.getElementById("stream-indicator");
+
+        // stop any existing stream
+        if (_streamAbort) { _streamAbort.abort = true; }
+
+        const controller = { abort: false };
+        _streamAbort = controller;
+
+        document.getElementById("out-stream").textContent = "";
+        indicator.className = "stream-live";
+
+        appendOut("out-stream", "► connecting...");
+
+        for await (const event of stream_agent_events(sid)) {
+            if (controller.abort) {
+                appendOut("out-stream", "■ stopped by user");
+                break;
+            }
+            appendOut("out-stream", JSON.stringify(event));
+        }
+
+        indicator.className = "stream-dead";
+        appendOut("out-stream", "── stream ended ──");
+    }
+
+    function run_stream_stop() {
+        if (_streamAbort) {
+            _streamAbort.abort = true;
+            _streamAbort = null;
+        }
+    }
+</script>
+
+</body>
+</html>

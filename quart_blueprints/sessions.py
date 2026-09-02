@@ -48,6 +48,9 @@ async def _delete_session():
         data = await request.get_json(silent=True)
         _session_id = data.get("session_id") if data.get("session_id") else None
 
+        if not _session_id or not isinstance(_session_id, str):
+            return r_h(False, "session_id must be non empty 'string'")
+
         _result = await delete_session(session_id=str(_session_id))
 
         if not _result:
@@ -75,7 +78,14 @@ async def _delete_session():
                 )
             )
 
-        return jsonify({"main_result": _result, "vector_clear": _clear_vectors})
+        return jsonify(
+            r_h(
+                True,
+                "session deleted",
+                {"main_result": _result, "vector_clear": _clear_vectors},
+            )
+        )
+
     except Exception as e:
         return jsonify(
             r_h(False, "something went wrong while deleting session", str(e))
@@ -95,7 +105,12 @@ async def create_message():
         _new_message = data.get("message")
         _session_id = data.get("session_id")
 
-        if not _new_message or not _session_id:
+        if (
+            not _new_message
+            or not _session_id
+            or not isinstance(_new_message, dict)
+            or not isinstance(_session_id, str)
+        ):
             return r_h(
                 False, "message or session_id must be non empty 'dict and string'"
             )
@@ -121,7 +136,12 @@ async def change_session_name():
         _new_name = data.get("name")
         _session_id = data.get("session_id")
 
-        if not _new_name or not _session_id:
+        if (
+            not _new_name
+            or not _session_id
+            or not isinstance(_session_id, str)
+            or not isinstance(_new_name, str)
+        ):
             return r_h(False, "name or session_id must be non empty 'string'")
 
         _result = await change_name(session_id=_session_id, new_name=_new_name)
@@ -142,7 +162,7 @@ async def toggle_session_pin():
         data = await request.get_json(silent=True)
         _session_id = data.get("session_id")
 
-        if not _session_id:
+        if not _session_id or not isinstance(_session_id, str):
             return r_h(False, "session_id must be non empty 'string'")
 
         _result = await toggle_pin(session_id=_session_id)
@@ -169,7 +189,12 @@ async def _update_last_user_message():
         _new_message = data.get("message")
         _session_id = data.get("session_id")
 
-        if not _new_message or not _session_id:
+        if (
+            not _new_message
+            or not _session_id
+            or not isinstance(_session_id, str)
+            or not isinstance(_new_message, dict)
+        ):
             return r_h(
                 False, "message or session_id must be non empty 'dict and string'"
             )
@@ -199,8 +224,17 @@ async def _get_session():
         end_m = data.get("end_m")
         _session_id = data.get("session_id")
 
-        if not _session_id:
-            return r_h(False, "session_id must be non empty 'string'")
+        if (
+            not _session_id
+            or not start_m
+            or not end_m
+            or not isinstance(start_m, int)
+            or not isinstance(end_m, int)
+        ):
+            return r_h(
+                False,
+                "session_id, start_m and end_m must be non empty and non zero 'string' and 'int'",
+            )
 
         _result = await get_session(session_id=_session_id, start=start_m, end=end_m)
         return jsonify(_result)
@@ -221,7 +255,20 @@ async def _get_all_sessions():
         _start = data.get("start")
         _end = data.get("end")
 
+        if (
+            not _start
+            or not _end
+            or not isinstance(_start, int)
+            or not isinstance(_end, int)
+        ):
+            return r_h(
+                False,
+                "session_id, start and end must be non empty and non zero 'string' and 'int'",
+            )
+
         _result = await get_all_sessions(start=_start, end=_end)
         return jsonify(_result)
     except Exception as e:
-        return jsonify(r_h(False, "something went wrong while getting sessions", str(e)))
+        return jsonify(
+            r_h(False, "something went wrong while getting sessions", str(e))
+        )

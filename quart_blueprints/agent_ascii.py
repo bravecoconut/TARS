@@ -85,7 +85,16 @@ async def _clear_session_vectors():
 
         _clear_paths = await delete_session_paths(session_id=_session_id)
 
-        return jsonify({"result": _result, "clear": _clear_paths})
+        return jsonify(
+            r_h(
+                True,
+                "session cleared",
+                {
+                    "result": _result,
+                    "clear": _clear_paths,
+                },
+            )
+        )
 
     except Exception as e:
         return jsonify(
