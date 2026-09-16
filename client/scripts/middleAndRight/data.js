@@ -217,7 +217,7 @@ async function populateMessagesCon(messages, session_id) {
                 thinkBlockSmry.title = epochToLocalTime(message.created)
                 thinkBlockMain.title = epochToLocalTime(message.created)
 
-                thinkBlockSmry.innerHTML = marked.parse(message._agent_reasoning)
+                thinkBlockSmry.innerHTML = marked.parse(toOneLine(message._agent_reasoning))
                 thinkBlockMain.innerHTML = marked.parse(message._agent_reasoning)
 
                 messagesConMessagesCon.appendChild(thinkBlockCon)
@@ -621,7 +621,7 @@ async function populateMessagesCon(messages, session_id) {
 
 
                                 const userRecap = rightSRConUserCon.cloneNode(false)
-                                userRecap.innerHTML = marked.parse(content.text)
+                                userRecap.innerHTML = marked.parse(toOneLine(content.text))
 
 
 
@@ -694,7 +694,7 @@ async function populateMessagesCon(messages, session_id) {
                         }
 
                         const userRecap = rightSRConUserCon.cloneNode(false)
-                        userRecap.innerHTML = marked.parse(message.content)
+                        userRecap.innerHTML = marked.parse(toOneLine(message.content))
 
                         if (!deviceIs) {
 

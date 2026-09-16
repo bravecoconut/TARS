@@ -218,3 +218,10 @@ function safeRemove(el) {
         el.parentNode.removeChild(el)
     }
 }
+
+function toOneLine(str) {
+    return str
+        .replace(/\r\n|\r|\n/g, " ")   // replace all line breaks with a space
+        .replace(/\s+/g, " ")           // collapse multiple spaces/tabs into one
+        .trim()                         // remove leading/trailing whitespace
+}

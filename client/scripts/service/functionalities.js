@@ -105,7 +105,7 @@ function addEventInDOM(event, session_id) {
             resonningElementSmry.dataset.rawText = (resonningElementSmry.dataset.rawText || "") + event.event.reasoning
             resonningElementMain.dataset.rawText = (resonningElementMain.dataset.rawText || "") + event.event.reasoning
 
-            resonningElementSmry.innerHTML = marked.parse(resonningElementSmry.dataset.rawText)
+            resonningElementSmry.innerHTML = marked.parse(toOneLine(resonningElementSmry.dataset.rawText))
             resonningElementMain.innerHTML = marked.parse(resonningElementMain.dataset.rawText)
 
             // console.log("event debug : " + event.event.reasoning + streamOfWhen)

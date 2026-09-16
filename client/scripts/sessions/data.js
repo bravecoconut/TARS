@@ -39,7 +39,7 @@ async function populateSessionsPanel() {
         const sessionSure = sessionsSessionSure.cloneNode(true)
 
 
-        sessionName.innerText = session.name
+        sessionName.innerText = toOneLine(session.name)
         sessionStream.title = "Zzz... agent is asleep 💤"
         sessionCancel.title = "Cancel"
         sessionSave.title = "Save"
