@@ -291,18 +291,21 @@ class Agents:
                 session_id=session_id,
             )
 
-            if not _save_killing["status"]:
+            # poll briefly to confirm it's actually dead
+            await asyncio.sleep(0.1)
+            try:
+                os.kill(pid, 0)  # signal 0 = just checks liveness, doesn't kill
                 return r_h(
                     False,
-                    "can't save killing",
-                    _save_killing,
+                    "something went wrong while terminating process, process is still alive",
                 )
+            except ProcessLookupError:
+                pass
 
-            return r_h(
-                True,
-                "process terminated",
-                _save_killing,
-            )
+            if not _save_killing["status"]:
+                return r_h(False, "can't save killing", _save_killing)
+
+            return r_h(True, "process terminated", _save_killing)
 
         except Exception as e:
             return r_h(
