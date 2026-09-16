@@ -210,8 +210,8 @@ async function populateSessionsPanel() {
                     }
                 })
 
-                sessionCancel.addEventListener("click", () => {
-
+                sessionCancel.addEventListener("click", (e) => {
+                    e.stopPropagation()
 
                     sessionName.style.flex = 1
                     sessionInput.style.display = "none"
@@ -227,7 +227,8 @@ async function populateSessionsPanel() {
                 })
 
 
-                sessionSave.addEventListener("click", async () => {
+                sessionSave.addEventListener("click", async (e) => {
+                    e.stopPropagation()
 
                     if (!sessionInput.value) {
                         showErrorModal("name must not empty", "write something first")

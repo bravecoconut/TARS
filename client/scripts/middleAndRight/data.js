@@ -226,7 +226,8 @@ async function populateMessagesCon(messages, session_id) {
 
                 thinkBlockCon.addEventListener(
                     "click",
-                    () => {
+                    (e) => {
+                        e.stopPropagation() 
                         if (thinkBlockMain.style.height) {
                             thinkBlockMain.style.height = null
                             thinkBlockMain.style.padding = deviceIs ? "2vw 4.5vw" : "1vw 1vw"
