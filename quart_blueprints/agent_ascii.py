@@ -30,15 +30,23 @@ async def _dump_new():
         # main logic
         data = await request.get_json(silent=True)
         _session_id = data.get("session_id")
-        _file_abslt_path = data.get("file_abslt_path")
+        _file_name = data.get("file_name")
+        _file_size = data.get("file_size")
+        _file_text = data.get("file_text")
         _cha_per_chunk = data.get("cha_per_chunk")
         _overlap = data.get("overlap")
 
         if not _session_id or not isinstance(_session_id, str):
             return r_h(False, "session id must be non empty 'string'")
 
-        if not _file_abslt_path or not isinstance(_file_abslt_path, str):
-            return r_h(False, "file abslt path must be non empty 'string'")
+        if not _file_name or not isinstance(_file_name, str):
+            return r_h(False, "file name must be non empty 'string'")
+
+        if not _file_size or not isinstance(_file_size, int):
+            return r_h(False, "file size must be non zero 'int'")
+
+        if not _file_text or not isinstance(_file_text, str):
+            return r_h(False, "file text must be non empty 'string'")
 
         if not _cha_per_chunk or not isinstance(_cha_per_chunk, int):
             return r_h(
@@ -51,7 +59,9 @@ async def _dump_new():
 
         _result = await dump_new_file_in_session(
             session_id=_session_id,
-            file_abslt_path=_file_abslt_path,
+            file_name=_file_name,
+            file_size=_file_size,
+            text=_file_text,
             cha_per_chunk=_cha_per_chunk,
             overlap=_overlap,
         )

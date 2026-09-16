@@ -5,6 +5,7 @@ from models.sessions import Sessions
 from beanie import PydanticObjectId
 import traceback
 
+
 async def create_new_session(name=None):
     try:
         new_session = Sessions(
@@ -13,17 +14,29 @@ async def create_new_session(name=None):
 
         _result = await new_session.insert()
 
-        return r_h(True, "new session created", str(_result))
+        return r_h(
+            True,
+            "new session created",
+            _result.model_dump(),
+        )
     except Exception as e:
-        return r_h(False, "Error occured when creating a new session", str(e))
+        return r_h(
+            False,
+            "Error occured when creating a new session",
+            str(e),
+        )
 
 
-async def create_new_message(session_id:str, message:dict):
+async def create_new_message(session_id: str, message: dict):
     try:
         try:
             session = await Sessions.get(session_id)
         except Exception as e:
-            return r_h(False, "no session exists with that session id or something went wrong", session_id)
+            return r_h(
+                False,
+                "no session exists with that session id or something went wrong",
+                session_id,
+            )
 
         session.messages.append(message)
         _result = await session.save()
@@ -31,13 +44,17 @@ async def create_new_message(session_id:str, message:dict):
         return r_h(True, "new message added", str(_result))
     except Exception as e:
         traceback.print_exc()
-        return r_h(False, "Error occured when adding a new message", str(e))
+        return r_h(
+            False,
+            "Error occured when adding a new message",
+            str(e),
+        )
 
 
-async def add_new_path(session_id, path):
+async def add_new_path(session_id, file_meta):
     try:
         session = await Sessions.get(session_id)
-        session.dumped_paths.append(path)
+        session.dumped_paths.append(file_meta)
         _result = await session.save()
 
         return r_h(True, "new path added", str(_result))

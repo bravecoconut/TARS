@@ -31,6 +31,17 @@ async function get_tones() {
 }
 
 
+async function get_user() {
+    const route = get_user_route
+    const params = null
+    const response = await getRequest(
+        route,
+        params
+    )
+    return response
+}
+
+
 async function set_user_name(new_name) {
     const route = set_name_route
     const body = { name: new_name }

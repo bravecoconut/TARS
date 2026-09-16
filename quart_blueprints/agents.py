@@ -33,9 +33,15 @@ def _get_all_agents():
                 )
             )
 
-        agents_from_sessions = agents.our_agents.keys()
+        agents_from_sessions = list(agents.our_agents.keys())
 
-        return jsonify(r_h(True, "get agents", agents_from_sessions))
+        return jsonify(
+            r_h(
+                True,
+                "get agents",
+                agents_from_sessions,
+            )
+        )
 
     except Exception as e:
         return jsonify(
@@ -57,20 +63,42 @@ async def _stream_agent_events():
         _session_id = request.args.get("session_id")  # GET → query param, not JSON body
 
         if not _session_id:
-            return jsonify(r_h(False, "session_id query param is required"))
+            return jsonify(
+                r_h(
+                    False,
+                    "session_id query param is required",
+                )
+            )
 
         if not isinstance(_session_id, str):
-            return r_h(False, "session id must be non empty 'string'")
+            return r_h(
+                False,
+                "session id must be non empty 'string'",
+            )
 
         if not agents.our_agents.get(_session_id):
-            return jsonify(r_h(False, "no agent exists with that session id"))
+            return jsonify(
+                r_h(
+                    False,
+                    "no agent exists with that session id",
+                )
+            )
 
         if not agents.our_agents[_session_id].get("running"):
-            return jsonify(r_h(False, "agent NOT running"))
+            return jsonify(
+                r_h(
+                    False,
+                    "agent NOT running",
+                )
+            )
+
+        broadcaster = agents.our_agents[_session_id]["broadcaster"]
 
         async def get_events():
+
+            queue = broadcaster.subscribe()
+
             try:
-                queue = agents.our_agents[_session_id]["queue"]
 
                 while True:
                     new_event = await queue.get()
@@ -83,11 +111,17 @@ async def _stream_agent_events():
                     payload = r_h(True, "get new event", new_event)
                     yield f"data: {json.dumps(payload, default=str)}\n\n"
 
+            except asyncio.CancelledError:
+                raise
+
             except Exception as e:
                 error_payload = r_h(
                     False, "something went wrong while getting new event", str(e)
                 )
                 yield f"data: {json.dumps(error_payload, default=str)}\n\n"
+
+            finally:
+                broadcaster.unsubscribe(queue)
 
         response = await make_response(
             get_events(),
@@ -136,7 +170,9 @@ async def _get_an_agent():
                 )
             )
 
-        history = {k: v for k, v in agents.our_agents[_session_id].items() if k != "agent"}  # remove agent object
+        history = {
+            k: v for k, v in agents.our_agents[_session_id].items() if k != "agent"
+        }  # remove agent object
 
         return jsonify(
             r_h(
@@ -350,7 +386,7 @@ async def _create_agent():
             return r_h(False, "session id must be non empty 'string'")
 
         if not _messages or not isinstance(_messages, list):
-            return r_h(False, "message must be non empty 'list'")
+            return r_h(False, "messages must be non empty 'list'")
 
         if agents.our_agents.get(_session_id):
             return jsonify(

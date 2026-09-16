@@ -57,6 +57,20 @@ async def _get_tones():
     except Exception as e:
         return jsonify(r_h(False, "something went wrong while getting tones", str(e)))
 
+@user_others_bp.route("/get_whole_user", methods=["GET"])
+async def _get_whole_user():
+    try:
+        print(request.cookies.get("sec_key"))
+        # validate sec key
+        sec_key = validate_sec_key(sec_key=request.cookies.get("sec_key"))
+        if not sec_key["status"]:
+            return jsonify(sec_key)
+
+        with open("user.json") as file:
+            _result = json.load(file)
+        return jsonify(r_h(True,"request processed", _result))
+    except Exception as e:
+        return jsonify(r_h(False, "something went wrong while getting tones", str(e)))
 
 ################
 ##### POST #####

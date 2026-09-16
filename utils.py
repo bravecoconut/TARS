@@ -7,6 +7,7 @@ from agent.system.configurations.configs.skills import (
 )
 import chromadb
 
+
 def make_tool_termination_message_before(tool_call_id):
     """
     Send this the MOMENT termination is requested — before you know
@@ -36,6 +37,7 @@ def make_tool_termination_message_after(tool_call_id):
             f"they don't wants this tool call to be run, that's why they cancelled this tool call."
         ),
     }
+
 
 def r_h(status=None, comment=None, data=None):
     return {
@@ -144,9 +146,15 @@ def get_all_ids_in_collection(collec_name):
         return r_h(False, "something went wrong while getting all ids", e)
 
 
-def make_file_chunks(file_abslt_path, collection_name, cha_per_chunk=200, overlap=40):
+def make_file_chunks(
+    file_name,
+    text,
+    collection_name,
+    cha_per_chunk=200,
+    overlap=40,
+):
     try:
-        if not format_available(file_abslt_path):
+        if not format_available(file_name):
             return r_h(
                 False,
                 "file format is not available",
@@ -163,13 +171,6 @@ def make_file_chunks(file_abslt_path, collection_name, cha_per_chunk=200, overla
                 "invalid chunk settings",
                 "overlap must be smaller than cha_per_chunk",
             )
-
-        # Read the whole file as plain text
-        with open(file_abslt_path, "r", encoding="utf-8") as f:
-            text = f.read()
-
-        # Just the filename (no folder path) so ids stay short and readable
-        file_name = os.path.basename(file_abslt_path)
 
         start = 0  # where the current chunk starts
         chunk_number = 0  # used to build a readable part of the id

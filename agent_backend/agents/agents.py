@@ -14,6 +14,29 @@ import signal
 import asyncio
 
 
+class SessionBroadcaster:
+    """One instance per running agent session. Every connected listener
+    gets its own private queue and a copy of every event — listeners
+    never compete for the same item, so switching sessions and coming
+    back never steals events from (or corrupts) another connection."""
+
+    def __init__(self):
+        self._subscribers: set[asyncio.Queue] = set()
+
+    def subscribe(self) -> asyncio.Queue:
+        q = asyncio.Queue()
+        self._subscribers.add(q)
+        return q
+
+    def unsubscribe(self, q: asyncio.Queue):
+        self._subscribers.discard(q)
+
+    async def publish(self, event):
+        # fan the SAME event out to every currently-connected listener's own queue
+        for q in list(self._subscribers):
+            await q.put(event)
+
+
 class Agents:
     def __init__(self, create_message):
         self.our_agents = {}
@@ -98,6 +121,7 @@ class Agents:
                 (event["type"] == "tool_start")
                 or (event["type"] == "tool_update")
                 or (event["type"] == "tool_timeout")
+                or (event["type"] == "timeout_decision")
                 or (event["type"] == "tool_done")
                 or (event["type"] == "tool_error")
                 or (event["type"] == "done")
@@ -138,20 +162,25 @@ class Agents:
             )
         except Exception as e:
             return r_h(
-                False, "something went wrong while adding message in agent", str(e)
+                False,
+                "something went wrong while adding message in agent",
+                str(e),
             )
 
     def create_agent(self, messages, session_id):
         try:
             if self.our_agents.get(session_id):
-                return r_h(False, "agent is already working under this session")
+                return r_h(
+                    False,
+                    "agent is already working under this session",
+                )
             _new_agent = _Main_Agent(
                 messages=messages,
                 meta={"session_id": session_id},
             )
             self.our_agents[session_id] = {"agent": _new_agent}
             self.our_agents[session_id]["events_history"] = []
-            self.our_agents[session_id]["queue"] = asyncio.Queue()
+            self.our_agents[session_id]["broadcaster"] = SessionBroadcaster()
             self.our_agents[session_id]["running"] = False
 
             return r_h(True, "agent created! ready to work")
@@ -162,24 +191,28 @@ class Agents:
         try:
             if not self.our_agents.get(session_id):
                 return r_h(False, "session agent not exist")
-                
 
             self.our_agents[session_id]["running"] = True
             async for event in self.our_agents[session_id]["agent"].events():
 
-                await self.our_agents[session_id]["queue"].put(r_h(True, "get event", event))
-                self.our_agents[session_id]["events_history"].append(event)
+                await self.our_agents[session_id]["broadcaster"].publish(
+                    r_h(True, "get event", {"event": event, "created": time.time()})
+                )
+
+                self.our_agents[session_id]["events_history"].append(
+                    {"event": event, "created": time.time()}
+                )
 
                 view = await self._event_viewer(
                     event=event,
                     session_id=session_id,
                 )
                 if not view["status"]:
-                    await self.our_agents[session_id]["queue"].put(
+                    await self.our_agents[session_id]["broadcaster"].publish(
                         r_h(False, "something went wrong", view)
                     )
 
-            await self.our_agents[session_id]["queue"].put(
+            await self.our_agents[session_id]["broadcaster"].publish(
                 r_h(
                     True,
                     "agent completed",
@@ -187,14 +220,18 @@ class Agents:
                 )
             )
 
-            await self.our_agents[session_id]["queue"].put(None)  # finish
+            await self.our_agents[session_id]["broadcaster"].publish(None)  # finish
 
             self.our_agents[session_id]["running"] = False
 
         except Exception as e:
             traceback.print_exc()
-            await self.our_agents[session_id]["queue"].put(
-                r_h(False, "can't start agent", str(e))
+            await self.our_agents[session_id]["broadcaster"].publish(
+                r_h(
+                    False,
+                    "can't start agent",
+                    str(e),
+                )
             )
 
     async def terminate_agent(self, session_id):
@@ -210,13 +247,26 @@ class Agents:
                     "can't stop agent, agent and its process are still running",
                     _terminate,
                 )
-            return r_h(True, "agent terminated", _terminate)
+            return r_h(
+                True,
+                "agent terminated",
+                _terminate,
+            )
 
         except Exception as e:
             traceback.print_exc()
-            return r_h(False, "can't stop agent", str(e))
+            return r_h(
+                False,
+                "can't stop agent",
+                str(e),
+            )
 
-    async def terminate_process(self, session_id, pid, tool_call_id):
+    async def terminate_process(
+        self,
+        session_id,
+        pid,
+        tool_call_id,
+    ):
         try:
             if not self.our_agents.get(session_id):
                 return r_h(False, "session agent not exist")
@@ -225,7 +275,10 @@ class Agents:
                 tool_call_id=tool_call_id
             )
 
-            self._add_message_in_agent(kill_message_after, session_id=session_id)
+            self._add_message_in_agent(
+                kill_message_after,
+                session_id=session_id,
+            )
             os.kill(pid, signal.SIGKILL)
             # add a flag in message before saving
             kill_message_after["_terminated"] = True
@@ -234,11 +287,22 @@ class Agents:
                 session_id=session_id,
             )
 
-
             if not _save_killing["status"]:
-                return r_h(False, "can't save killing", _save_killing)
+                return r_h(
+                    False,
+                    "can't save killing",
+                    _save_killing,
+                )
 
-            return r_h(True, "process terminated", _save_killing)
+            return r_h(
+                True,
+                "process terminated",
+                _save_killing,
+            )
 
         except Exception as e:
-            return r_h(False, "something went wrong while terminating process", str(e))
+            return r_h(
+                False,
+                "something went wrong while terminating process",
+                str(e),
+            )

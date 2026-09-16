@@ -243,6 +243,7 @@ class RegularInterface:
             "tool_start"   - a tool execution just started
             "tool_update"  - live stdout/stderr from a running tool
             "tool_timeout" - a tool's timeout expired, agent is deciding
+            "timeout_decision" - agent decided to extend or terminate (check status field)
             "tool_done"    - a tool finished (result is in tool_call.result/stdout)
             "tool_error"   - a tool had a JSON-parse error or crashed
             "error"        - the LLM stream itself errored
@@ -253,6 +254,9 @@ class RegularInterface:
             f"run_agent: starting | model={model!r} max_turns={self.max_turns} "
             f"tools={len(self.openai_agent_tools)} skills={len(self.agent_skills)}"
         )
+
+        self._stopped = False
+        self._openai.stop_event.clear()
 
         # ---- helper: build a clean yield dict ----
         def _make_event(
@@ -686,6 +690,34 @@ class RegularInterface:
                                             f"run_agent: using pre-set "
                                             f"decision={decision}"
                                         )
+
+                                        # Let the client know what the
+                                        # decision was (extend or kill).
+                                        yield _make_event(
+                                            "timeout_decision",
+                                            turn,
+                                            tool_call_id=tc_id,
+                                            process_id=u_pid,
+                                            tool_name=tc_name,
+                                            tool_args=tc_args,
+                                            tool_comment=tc_comment,
+                                            tool_timeout=(
+                                                decision if decision > 0
+                                                else None
+                                            ),
+                                            stdout=u_stdout,
+                                            stderr=u_stderr,
+                                            result=(
+                                                f"Extended by {decision}s"
+                                                if decision > 0
+                                                else "Terminated"
+                                            ),
+                                            status=(
+                                                "extended" if decision > 0
+                                                else "terminated"
+                                            ),
+                                        )
+
                                         self.out_q.put(decision)
                                     else:
                                         # Ask the LLM to decide: extend
@@ -740,6 +772,34 @@ class RegularInterface:
                                             f"run_agent: timeout decision "
                                             f"for '{tc_name}': {decision}"
                                         )
+
+                                        # Let the client know what the
+                                        # decision was (extend or kill).
+                                        yield _make_event(
+                                            "timeout_decision",
+                                            turn,
+                                            tool_call_id=tc_id,
+                                            process_id=u_pid,
+                                            tool_name=tc_name,
+                                            tool_args=tc_args,
+                                            tool_comment=tc_comment,
+                                            tool_timeout=(
+                                                decision if decision > 0
+                                                else None
+                                            ),
+                                            stdout=u_stdout,
+                                            stderr=u_stderr,
+                                            result=(
+                                                f"Extended by {decision}s"
+                                                if decision > 0
+                                                else "Terminated"
+                                            ),
+                                            status=(
+                                                "extended" if decision > 0
+                                                else "terminated"
+                                            ),
+                                        )
+
                                         self.out_q.put(decision)
 
                             # Wait for the worker to finish. If it hangs,

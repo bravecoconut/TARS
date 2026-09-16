@@ -35,7 +35,7 @@ async function postRequest(route, body) {
         return RH(
             false,
             "something went wrong while processing request",
-            String(error));
+            JSON.stringify(error));
     }
 }
 
@@ -80,6 +80,6 @@ async function getRequest(route, params) {
         return RH(
             false,
             "something went wrong while processing request",
-            String(error));
+            JSON.stringify(error));
     }
 }

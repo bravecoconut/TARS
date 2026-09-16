@@ -1,13 +1,17 @@
 async function dump_new_ascii_file(
     session_id,
-    file_abslt_path,
+    file_name,
+    file_size,
+    file_text,
     cha_per_chunk,
     overlap
 ) {
     const route = dump_new_route
     const body = {
         session_id: session_id,
-        file_abslt_path: file_abslt_path,
+        file_name: file_name,
+        file_size: file_size,
+        file_text: file_text,
         cha_per_chunk: cha_per_chunk,
         overlap: overlap
     }

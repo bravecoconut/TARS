@@ -2,6 +2,7 @@
 const get_instructions_route = "/api/user/others/get_instructions" 
 const get_memory_route = "/api/user/others/get_memory"
 const get_tones_route = "/api/user/others/get_tones"
+const get_user_route = "/api/user/others/get_whole_user"
 
 
 const get_all_agents_route = "/api/agents/get_all_agents"

@@ -1,0 +1,16 @@
+addOpacityHover(newTaskCon)
+addOpacityHover(rightConToggCon)
+addOpacityHover(settingsConToggCon)
+addOpacityHover(leftConToggle)
+
+addOpacityHover(rightConNavDividerOne)
+addOpacityHover(rightConNavDividerTwo)
+
+addOpacityHover(rightDDUploadConUploadNewEl)
+addOpacityHover(rightDDUploadConClearAll)
+addOpacityHover(rightDDUploadConClearAllSure)
+addOpacityHover(rightDDUploadConDetailsSelectFile)
+
+addOpacityHover(messageConMainAddImage)
+addOpacityHover(messageConMainSendMessage)
+

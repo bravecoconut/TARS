@@ -37,10 +37,12 @@ async def startup():
     await init_db()
 
 # temp
+@app.route("/test")
+async def test():
+    return await send_from_directory(app.static_folder, "templates/agents-test.html")
 @app.route("/")
 async def index():
-    return await send_from_directory(app.static_folder, "templates/agents-test.html")
-
+    return await send_from_directory(app.static_folder, "templates/index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

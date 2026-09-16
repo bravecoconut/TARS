@@ -10,20 +10,21 @@ from beanie import PydanticObjectId
 from backend.upload.session_uploads import add_new_path
 import json
 import copy
-
+import time
 
 async def dump_new_file_in_session(
     session_id,
-    file_abslt_path,
+    file_name,
+    file_size,
+    text,
     cha_per_chunk=100,
     overlap=30,
 ):
     try:
-        if not Path(file_abslt_path).exists():
-            return r_h(False, "file not exists")
 
         _chunks = make_file_chunks(
-            file_abslt_path=file_abslt_path,
+            file_name=file_name,
+            text=text,
             cha_per_chunk=cha_per_chunk,
             overlap=overlap,
             collection_name=BASE_COLLECTION_NAME,
@@ -56,7 +57,13 @@ async def dump_new_file_in_session(
 
         _save_path = await add_new_path(
             session_id=session_id,
-            path=file_abslt_path,
+            file_meta={
+                "file_name":file_name,
+                "file_size":file_size,
+                "chunks":_len_of_docs,
+                "created":time.time(),
+
+            },
         )
 
         if not _save_path["status"]:
