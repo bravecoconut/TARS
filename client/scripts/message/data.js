@@ -62,13 +62,13 @@ async function sendMessage() {
         return
     }
 
-
-    // come here and add into DOM
-
-
-
     if (!getSession?.data?.data?.running) {
         await createAndFireAgent(currentSession)
+    } else {
+        await addMessageIntoRunningAgent(
+            currentSession,
+            message
+        )
     }
 
 }

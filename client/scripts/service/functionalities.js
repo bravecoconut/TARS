@@ -521,6 +521,52 @@ function addEventInDOM(event, session_id) {
 
         }
 
+        if (event?.message) {
+
+            if (Array.isArray(event.message.content)) {
+                const userBlockConImageCon = messagesConUserImagesCon.cloneNode(false)
+                let hasImages = false
+
+                event.message.content.forEach(content => {
+                    if (content?.type == "image_url") {
+                        hasImages = true
+
+                        const userBlockUserImagesEl = messagesConUserImagesEl.cloneNode(false)
+                        userBlockUserImagesEl.src = content.image_url.url
+                        if (userBlockUserImagesEl.style.height >= userBlockUserImagesEl.style.width) {
+                            userBlockUserImagesEl.style.width = ""
+                        } else {
+                            userBlockUserImagesEl.style.height = ""
+
+                        }
+                        userBlockConImageCon.appendChild(userBlockUserImagesEl)
+                        messagesConMessagesCon.appendChild(userBlockConImageCon)
+
+                    }
+
+
+                    if (content?.type === "text" && content?.tars === false) {
+
+                        const userAddedBlockCon = messagesConUserAddedEl.cloneNode(false)
+                        userAddedBlockCon.innerHTML = marked.parse(content.text)
+                        messagesConMessagesCon.appendChild(userAddedBlockCon)
+
+                    }
+
+                });
+
+                if (hasImages) {
+                    messagesConMessagesCon.appendChild(userBlockConImageCon)
+                }
+
+            } else {
+                const userAddedBlockCon = messagesConUserAddedEl.cloneNode(false)
+                userAddedBlockCon.innerHTML = marked.parse(event.message.content)
+                messagesConMessagesCon.appendChild(userAddedBlockCon)
+            }
+        }
+
+
     } catch (e) {
         console.error("populateMessagesCon failed:", e)
     }
@@ -535,6 +581,11 @@ async function streamSessionAgent(sessionId) {
     try {
         messagesConMessagesCon.appendChild(messagesConIndicator)
         messagesConIndicator.textContent = "Starting"
+        messagesConIndicator.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "nearest"
+        });
 
         const history = await get_event_history(sessionId)
 

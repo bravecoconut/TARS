@@ -96,11 +96,19 @@ rightDDUploadConClearAllSure.addEventListener(
 
 )
 
-messageConMainSendMessage.addEventListener(
-    "click",
-    async () => {
+let isSending = false
+
+messageConMainSendMessage.addEventListener("click", async () => {
+    if (isSending) return   // ignore clicks while a send is already in progress
+
+    isSending = true
+    try {
         await sendMessage()
-    })
+    } finally {
+        isSending = false   // always reset, even if sendMessage throws
+        messageTextareaSize()
+    }
+})
 
 // Track whether user is scrolled to the bottom
 messagesConEl.addEventListener("scroll", () => {

@@ -161,6 +161,93 @@ async function createAndFireAgent(sessionId) {
 
 }
 
+async function addMessageIntoRunningAgent(sessionId, message) {
+    const messageToSend = formatMessagesForOpenAI([message])
+    const addIn = await add_message_in_agent(sessionId, messageToSend[0])
+
+    if (!addIn.status) {
+        showErrorModal(
+            "can't add your message into agent's running instance",
+            JSON.stringify(addIn.data)
+        )
+        return
+    }
+
+    messageConMainTextarea.value = ""
+    messageConMainImagesCon.innerHTML = ""
+
+    pickedFIles.length = 0
+    messageConMainImagesCon.style.height = 0
+    messageConMainImagesCon.style.padding = 0
+    messageTextareaSize()
+    messageTextareaSize()
+    messageTextareaSize()
+
+    if (Array.isArray(message.content)) {
+        const userBlockConImageCon = messagesConUserImagesCon.cloneNode(false)
+        let hasImages = false
+
+        message.content.forEach(content => {
+            if (content?.type == "image_url") {
+                hasImages = true
+
+                const userBlockUserImagesEl = messagesConUserImagesEl.cloneNode(false)
+                userBlockUserImagesEl.src = content.image_url.url
+                if (userBlockUserImagesEl.style.height >= userBlockUserImagesEl.style.width) {
+                    userBlockUserImagesEl.style.width = ""
+                } else {
+                    userBlockUserImagesEl.style.height = ""
+
+                }
+                userBlockConImageCon.appendChild(userBlockUserImagesEl)
+                messagesConMessagesCon.appendChild(userBlockConImageCon)
+
+            }
+
+
+            if (content?.type === "text" && content?.tars === false) {
+
+                const userAddedBlockCon = messagesConUserAddedEl.cloneNode(false)
+                userAddedBlockCon.innerHTML = marked.parse(content.text)
+                messagesConMessagesCon.appendChild(userAddedBlockCon)
+
+                userAddedBlockCon.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                    inline: "nearest"
+                });
+            }
+
+        });
+
+        if (hasImages) {
+            messagesConMessagesCon.appendChild(userBlockConImageCon)
+        }
+
+    } else {
+        const userAddedBlockCon = messagesConUserAddedEl.cloneNode(false)
+        userAddedBlockCon.innerHTML = marked.parse(message.content)
+        messagesConMessagesCon.appendChild(userAddedBlockCon)
+
+        userAddedBlockCon.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "nearest"
+        });
+    }
+
+}
+
+// (async function _() {
+//     await addMessageIntoRunningAgent(
+//         "6aaab509c9c13b1bd137cf56",
+//         {
+//             "role": "user",
+//             "content": "hello"
+//         }
+//     )
+// })();
+
 // (function sendMessage() {
 //     messageConMainSendMessage.addEventListener(
 //         "click",

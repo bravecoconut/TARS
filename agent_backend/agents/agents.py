@@ -155,6 +155,10 @@ class Agents:
     def _add_message_in_agent(self, message: dict, session_id: str):
         try:
             self.our_agents[session_id]["agent"].ri.agent_messages.append(message)
+            self.our_agents[session_id]["events_history"].append(
+                {"message": message, "created": time.time()}
+            )
+
             return r_h(
                 True,
                 "message added",
