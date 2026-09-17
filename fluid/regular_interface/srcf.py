@@ -78,9 +78,14 @@ class SRCF:
         contents = []
         for message in reversed(messages):
             if len(contents) < self.srcf_last_n:
-                contents.append(message["content"])
+                if message.get("content"):
+                    contents.append(message["content"])
             else:
                 break
+
+        if not contents:
+            # If there's no valid content to query, just return everything
+            return [], messages
 
         results = self.collection.query(
             query_texts=contents,
