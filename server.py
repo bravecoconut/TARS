@@ -43,6 +43,9 @@ async def test():
 @app.route("/")
 async def index():
     return await send_from_directory(app.static_folder, "templates/index.html")
+@app.route("/auth")
+async def auth():
+    return await send_from_directory(app.static_folder, "templates/auth.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

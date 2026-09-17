@@ -207,7 +207,7 @@ function removeCountdown(el, intervalId) {
 
 async function populateMessagesCon(messages, session_id) {
     try {
-        messages.forEach(message => {
+        messages.forEach((message, index) => {
             if (message?._agent_reasoning) {
                 const thinkBlockCon = messagesConThinkingEl.cloneNode(false)
                 const thinkBlockSmry = messagesConThinkingSummary.cloneNode(false)
@@ -227,7 +227,7 @@ async function populateMessagesCon(messages, session_id) {
                 thinkBlockCon.addEventListener(
                     "click",
                     (e) => {
-                        e.stopPropagation() 
+                        e.stopPropagation()
                         if (thinkBlockMain.style.height) {
                             thinkBlockMain.style.height = null
                             thinkBlockMain.style.padding = deviceIs ? "2vw 4.5vw" : "1vw 1vw"
@@ -618,7 +618,9 @@ async function populateMessagesCon(messages, session_id) {
                                         inline: "nearest"
                                     });
                                 }
-
+                                if (index === getLastUserMessage(messages)) {
+                                    makeLastUserEditable(userBlockCon)
+                                }
 
                                 const userRecap = rightSRConUserCon.cloneNode(false)
                                 userRecap.innerHTML = marked.parse(toOneLine(content.text))
@@ -691,6 +693,10 @@ async function populateMessagesCon(messages, session_id) {
                                 block: "start",
                                 inline: "nearest"
                             });
+                        }
+
+                        if (index === getLastUserMessage(messages)) {
+                            makeLastUserEditable(userBlockCon)
                         }
 
                         const userRecap = rightSRConUserCon.cloneNode(false)

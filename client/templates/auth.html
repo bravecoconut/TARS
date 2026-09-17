@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TARS Auth</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0d0d0d;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .card {
+        width: 320px;
+        padding: 32px;
+        background: #161616;
+        border: 1px solid #262626;
+        border-radius: 12px;
+    }
+    .card h1 {
+        color: #eaeaea;
+        font-size: 20px;
+        margin: 0 0 20px;
+        letter-spacing: 0.5px;
+    }
+    input {
+        width: 100%;
+        padding: 12px 14px;
+        background: #0d0d0d;
+        border: 1px solid #2e2e2e;
+        border-radius: 8px;
+        color: #eaeaea;
+        font-size: 14px;
+        outline: none;
+        margin-bottom: 14px;
+    }
+    input:focus { border-color: #5b8cff; }
+    button {
+        width: 100%;
+        padding: 12px 14px;
+        background: #5b8cff;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    button:hover { background: #4a7aef; }
+    #status {
+        margin-top: 12px;
+        font-size: 12px;
+        color: #7fd88f;
+        min-height: 16px;
+        text-align: center;
+    }
+    #status.error { color: #ff6b6b; }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h1>TARS Access</h1>
+    <input id="tarsInput" type="password" placeholder="Enter access key" autocomplete="off">
+    <button id="tarsSubmit">Continue</button>
+    <div id="status"></div>
+</div>
+
+<script>
+    const input = document.getElementById("tarsInput")
+    const submitBtn = document.getElementById("tarsSubmit")
+    const status = document.getElementById("status")
+
+    const COOKIE_NAME = "sec_key" // must match request.cookies.get("sec_key") on the backend
+
+    function setCookie(name, value, days) {
+        const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString()
+        document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`
+    }
+
+    function deleteCookie(name) {
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Lax`
+    }
+
+    function getCookie(name) {
+        const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"))
+        return match ? decodeURIComponent(match[2]) : null
+    }
+
+    function setStatus(message, isError) {
+        status.textContent = message
+        status.classList.toggle("error", !!isError)
+    }
+
+    async function verifyKey(value) {
+        // the endpoint auths off the "sec_key" cookie, so it has to be set
+        // BEFORE the request goes out, not after
+        setCookie(COOKIE_NAME, value, 1) // short-lived until confirmed valid
+
+        const res = await fetch("/api/user/others/get_whole_user", {
+            method: "GET",
+            credentials: "include" // ensures the cookie is actually sent
+        })
+
+        if (!res.ok) {
+            throw new Error(`request failed with status ${res.status}`)
+        }
+
+        return res.json() // expected shape: { status: bool, message: str, data: ... }
+    }
+
+    async function handleSubmit() {
+        const value = input.value.trim()
+
+        if (!value) {
+            setStatus("Please enter a value.", true)
+            return
+        }
+
+        submitBtn.disabled = true
+        submitBtn.textContent = "Verifying..."
+        setStatus("Verifying key...", false)
+
+        try {
+            const result = await verifyKey(value)
+
+            if (result.status) {
+                // key confirmed valid — keep it around longer now
+                setCookie(COOKIE_NAME, value, 7)
+                setStatus("Key verified and saved.", false)
+                input.value = ""
+            } else {
+                deleteCookie(COOKIE_NAME)
+                setStatus(result.message || "Invalid key.", true)
+            }
+        } catch (e) {
+            deleteCookie(COOKIE_NAME)
+            setStatus("Something went wrong while verifying: " + e.message, true)
+        } finally {
+            submitBtn.disabled = false
+            submitBtn.textContent = "Continue"
+        }
+    }
+
+    submitBtn.addEventListener("click", handleSubmit)
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") handleSubmit()
+    })
+
+    // if a sec_key cookie already exists, assume the user is authed
+    const existing = getCookie(COOKIE_NAME)
+    if (existing) {
+        setStatus("Existing key found and loaded.", false)
+    }
+</script>
+
+</body>
+</html>

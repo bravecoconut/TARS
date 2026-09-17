@@ -108,3 +108,20 @@ function getMessagesUntilLastUserMessage(messages, includeLastUserMessage = true
         ? messages.slice(0, lastIndex + 1)
         : messages.slice(0, lastIndex)
 }
+
+function getLastUserMessage(messages) {
+    for (let i = messages.length - 1; i >= 0; i--) {
+        if (messages[i].role === "user" ) {
+            if(!messages[i]?.added){
+
+                return i // or `return i` if you want the index
+            }
+        }
+    }
+    return null // no user message found
+}
+
+function makeLastUserEditable(el) {
+    console.log("el: ")
+    // el.style.border = "1px solid red"
+}

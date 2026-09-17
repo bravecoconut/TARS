@@ -523,8 +523,7 @@
     newTaskBtn.style.backgroundColor = "rgb(232, 232, 232)"
     newTaskBtn.style.borderRadius = deviceIs ? "3.8vw" : "1vw"
     newTaskBtn.style.cursor = "pointer"
-
-
+    newTaskBtn.style.fontSize = deviceIs ? "5vw" : "1.2vw"
 })();
 
 (function addSessionsCon() {

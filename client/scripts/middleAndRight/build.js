@@ -517,8 +517,8 @@
     messagesConUserEl.textContent = `no user Input yet!`
     messagesConUserEl.style.backgroundColor = "#000000"
     messagesConUserEl.style.color = "#fff"
-    messagesConUserEl.style.maxWidth = "70%"
-    messagesConUserEl.style.margin = deviceIs ? "4vw 0 0vw 12vw" : "1vw 0 0vw 8vw"
+    messagesConUserEl.style.maxWidth = "80%"
+    messagesConUserEl.style.margin = deviceIs ? "4vw 0 7vw 12vw" : "1vw 0 0vw 8vw"
     messagesConUserEl.style.transition = "350ms"
     messagesConUserEl.style.padding = deviceIs ? "4vw 4vw" : "1vw 1vw"
     messagesConUserEl.style.display = "flex"
