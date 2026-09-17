@@ -4,6 +4,9 @@
 
 TARS is built on top of the [**fluid**](https://github.com/bravecoconut/fluid) agent framework — a modular Python library that handles LLM generation, tool registration and execution, vector retrieval (RAG), and intelligent context management. TARS wires fluid into a full-stack application with a Quart (async Flask) server, MongoDB persistence, a ChromaDB vector store, and a Server-Sent Events (SSE) streaming interface.
 
+[![TARS completing tasks seamlessly](https://img.youtube.com/vi/lFAg4LnPKF8/maxresdefault.jpg)](https://www.youtube.com/watch?v=lFAg4LnPKF8)
+
+
 ---
 
 ## Key Features
@@ -83,6 +86,9 @@ TARS is built on top of the [**fluid**](https://github.com/bravecoconut/fluid) a
 ---
 
 ## Quick Start
+
+[![TARS Installation & Usage Guide](https://img.youtube.com/vi/OgA2XOeov1c/maxresdefault.jpg)](https://www.youtube.com/watch?v=OgA2XOeov1c)
+
 
 ### Prerequisites
 
