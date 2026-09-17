@@ -25,13 +25,13 @@
     "memory_path": "memory/memory.md",
     "base_url": "https://lights-replacement-filters-keeping.trycloudflare.com/v1",
     "api_key": "ollama",
-    "model": "qwen3:14b",
+    "model": "gpt-oss:20b",
     "embedding_model":"znbang/bge:large-en-v1.5-f16",
     "max_completion_tokens": 30000,
     "max_retries": 2,
     "timeout": 120,
-    "srcf_on_length": 50,
-    "srcf_percent": 70,
-    "srcf_last_n": 5,
-    "srcf_threshold": 0.323
+    "srcf_on_length": 100,
+    "srcf_percent": 90,
+    "srcf_last_n": 8,
+    "srcf_threshold": 0.4
 }
