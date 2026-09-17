@@ -134,6 +134,8 @@ python3 -m server
 
 The server starts on `http://localhost:5000`.
 
+first go to `http://localhost:5000/auth` and set your secret key that you provide earlier as 'YOUR_SECRET_KEY' and don't share that to key to stranger or they may use your TARS.
+
 > **Note:** The current UI has not been fully optimized for mobile devices. Contributions to improve responsiveness in the `/client` directory are welcome.
 
 ---
