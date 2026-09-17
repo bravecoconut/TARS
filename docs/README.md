@@ -93,7 +93,7 @@ TARS is built on top of the [**fluid**](https://github.com/bravecoconut/fluid) a
 ### Installation
 
 ```bash
-git clone <your-repo-url> TARS
+git clone https://github.com/bravecoconut/TARS.git
 cd TARS
 python3 -m venv .venv
 source .venv/bin/activate
@@ -108,7 +108,7 @@ pip install -r requirements.txt
 python3 -m set_secret_key YOUR_SECRET_KEY
 ```
 
-2. **Edit `user.json`** to configure your LLM endpoint:
+2. **Edit `user.json`** to configure your LLM endpoint or do it from UI:
 
 ```json
 {
@@ -122,17 +122,19 @@ python3 -m set_secret_key YOUR_SECRET_KEY
 3. **Create a `.env` file** with:
 
 ```
-MAX_NEW_SKILLS=2
-MAX_TURNS=20
+MAX_NEW_SKILLS=0
+MAX_TURNS=50
 ```
 
 ### Running
 
 ```bash
-python3 server.py
+python3 -m server
 ```
 
 The server starts on `http://localhost:5000`.
+
+> **Note:** The current UI has not been fully optimized for mobile devices. Contributions to improve responsiveness in the `/client` directory are welcome.
 
 ---
 
@@ -207,4 +209,4 @@ TARS/
 
 ## License
 
-This project is currently in active development.
+This project is licensed under the Apache License 2.0. See [LICENSE](../LICENSE) for details.
