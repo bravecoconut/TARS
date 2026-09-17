@@ -20,17 +20,23 @@ class SRCF:
         srcf_percent=80,
         srcf_last_n=5,
         srcf_threshold=0.323,
-        srcf_em_model="modules/regular_interface/embedding_models/BAAI_bge-small-en-v1.5/",
+        srcf_em_model=None,
+        embedding_function=None,
     ):
         self.srcf_percent = srcf_percent
         self.srcf_last_n = srcf_last_n
         self.srcf_threshold = srcf_threshold
 
-        self.embedding_function = (
-            embedding_functions.SentenceTransformerEmbeddingFunction(
-                model_name=srcf_em_model
+        if embedding_function is not None:
+            self.embedding_function = embedding_function
+        else:
+            if srcf_em_model is None:
+                srcf_em_model = "modules/regular_interface/embedding_models/BAAI_bge-small-en-v1.5/"
+            self.embedding_function = (
+                embedding_functions.SentenceTransformerEmbeddingFunction(
+                    model_name=srcf_em_model
+                )
             )
-        )
 
         self.client = chromadb.Client()
         self.collection = self.client.create_collection(

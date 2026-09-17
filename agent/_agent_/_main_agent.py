@@ -9,6 +9,7 @@ import json
 import asyncio
 import queue as sync_queue
 import threading
+
 load_dotenv()
 
 from agent.system.configurations.configs.open_configs import (
@@ -17,6 +18,7 @@ from agent.system.configurations.configs.open_configs import (
     DEFAULT_HEADERS,
 )
 import time
+from chromadb.utils import embedding_functions
 
 
 class _Main_Agent:
@@ -30,7 +32,12 @@ class _Main_Agent:
                 srcf_percent=int(self._user["srcf_percent"]),
                 srcf_last_n=int(self._user["srcf_last_n"]),
                 srcf_threshold=float(self._user["srcf_threshold"]),
-            ).srcf_go(messages=messages)
+                embedding_function=embedding_functions.OpenAIEmbeddingFunction(
+                    api_key=self._user["api_key"],
+                    api_base=self._user["base_url"],
+                    model_name=self._user["embedding_model"],
+                )
+            )
 
         self.ri = RegularInterface(
             messages=messages,
