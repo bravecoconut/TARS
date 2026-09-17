@@ -1,8 +1,6 @@
 from fluid.toolkit.tool_registry import tool
 
 """
-type_safe_utils.py
-
 Five standalone, type-safe utility functions. Each is fully self-contained --
 no class instantiation, no config files, no env vars required. Import and
 call directly: FUNCTION(ARGS).
@@ -12,6 +10,12 @@ Dependencies: standard library only, except `download_file`, which uses
 
 - running model's parallel tool calls sequencially is feature, not a bug., just to
  save api requests.
+
+SANDBOXING: all relative paths (dest/path/cwd/source_dir/output_path) resolve
+against AGENT_HOME instead of the process's actual working directory, so these
+tools never accidentally read/write/execute against whatever project folder
+the agent happens to be launched from. Pass an absolute path if you deliberately
+need to reach outside AGENT_HOME.
 """
 
 
@@ -22,6 +26,24 @@ import time
 from pathlib import Path
 
 import requests
+
+
+# --------------------------------------------------------------------------
+# Sandbox root: relative paths land here, never in the process's real cwd.
+# --------------------------------------------------------------------------
+AGENT_HOME = Path.home() / "tars_workspace"
+AGENT_HOME.mkdir(parents=True, exist_ok=True)
+
+
+def _resolve(path: str) -> Path:
+    """
+    Resolve a path against AGENT_HOME unless it's already absolute.
+    Relative paths ("downloads/file.zip") stay inside the sandbox.
+    Absolute paths ("/etc/hosts", "C:\\Users\\...") pass through unchanged,
+    since the agent may need to deliberately reach outside the sandbox.
+    """
+    p = Path(path).expanduser()
+    return p if p.is_absolute() else (AGENT_HOME / p)
 
 
 # --------------------------------------------------------------------------
@@ -38,6 +60,10 @@ def download_file(
     Download a file from `url` and save it to `dest`. Streams the response
     so large files never get fully buffered in memory.
 
+    Relative `dest` paths are saved under the agent's sandbox directory
+    (~/tars_workspace), not the current working directory. Pass an absolute
+    path to save elsewhere.
+
     Returns the absolute path of the saved file as a string.
 
     Raises:
@@ -47,9 +73,9 @@ def download_file(
 
     Example:
         >>> download_file("https://example.com/file.zip", "downloads/file.zip")
-        '/home/user/downloads/file.zip'
+        '/home/user/tars_workspace/downloads/file.zip'
     """
-    dest_path = Path(dest)
+    dest_path = _resolve(dest)
     if dest_path.exists() and not overwrite:
         raise FileExistsError(
             f"{dest_path} already exists (pass overwrite=True to replace it)"
@@ -86,7 +112,9 @@ def run_shell_command(
     Args:
         cmd: The shell command to run, e.g. "ls -la /tmp" or "python3 script.py"
         timeout: Maximum seconds to wait before killing the command.
-        cwd: Working directory to run the command in. Empty string = current directory.
+        cwd: Working directory to run the command in. Empty string = the
+             agent's sandbox directory (~/tars_workspace), NOT the actual
+             process cwd. Pass an absolute path to run elsewhere.
 
     Returns a string with this format:
         RETURNCODE: 0
@@ -96,10 +124,10 @@ def run_shell_command(
         <errors here, if any>
 
     Example:
-        >>> run_shell_command("ls -la /tmp")
+        >>> run_shell_command("ls -la")
         'RETURNCODE: 0\\nSTDOUT:\\ntotal 40\\ndrwxrwxrwt ...\\nSTDERR:\\n'
     """
-    work_dir = cwd if cwd else None
+    work_dir = str(_resolve(cwd)) if cwd else str(AGENT_HOME)
     try:
         completed = subprocess.run(
             cmd,
@@ -145,6 +173,9 @@ def compute_file_hash(
     """
     Compute the hex digest of a file without loading it fully into memory.
 
+    Relative `path` resolves under the agent's sandbox directory
+    (~/tars_workspace), not the current working directory.
+
     Args:
         path: Path to the file to hash.
         algorithm: Hash algorithm to use. One of: md5, sha1, sha256, sha512.
@@ -159,7 +190,7 @@ def compute_file_hash(
         >>> compute_file_hash("interface.py")
         'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3...'
     """
-    file_path = Path(path)
+    file_path = _resolve(path)
     if not file_path.is_file():
         raise FileNotFoundError(f"No such file: {file_path}")
 
@@ -190,18 +221,22 @@ def write_text_file(
     """
     Write text content to a file. Creates parent directories if needed.
 
+    Relative `path` is written under the agent's sandbox directory
+    (~/tars_workspace), not the current working directory. Pass an absolute
+    path to write elsewhere.
+
     Args:
-        path: Destination file path, e.g. "/home/user/notes/summary.txt"
+        path: Destination file path, e.g. "notes/summary.txt"
         content: The text content to write to the file.
         overwrite: If True, overwrite existing file. If False, raise error if file exists.
 
     Returns a confirmation string with the absolute path and byte count.
 
     Example:
-        >>> write_text_file("/tmp/hello.txt", "Hello World!")
-        'Written 12 bytes to /tmp/hello.txt'
+        >>> write_text_file("hello.txt", "Hello World!")
+        'Written 12 bytes to /home/user/tars_workspace/hello.txt'
     """
-    file_path = Path(path)
+    file_path = _resolve(path)
     if file_path.exists() and not overwrite:
         raise FileExistsError(
             f"{file_path} already exists (pass overwrite=True to replace it)"
@@ -226,6 +261,9 @@ def zip_directory(
     Compress an entire directory tree into a .zip file, preserving relative
     paths inside the archive.
 
+    Relative `source_dir`/`output_path` resolve under the agent's sandbox
+    directory (~/tars_workspace), not the current working directory.
+
     Args:
         source_dir: Path to the directory to compress.
         output_path: Where to save the .zip file.
@@ -238,14 +276,14 @@ def zip_directory(
         FileExistsError: if `output_path` exists and overwrite=False.
 
     Example:
-        >>> zip_directory("build/", "release/build.zip")
-        '/home/user/release/build.zip'
+        >>> zip_directory("build", "release/build.zip")
+        '/home/user/tars_workspace/release/build.zip'
     """
-    src = Path(source_dir)
+    src = _resolve(source_dir)
     if not src.is_dir():
         raise NotADirectoryError(f"Not a directory: {src}")
 
-    out = Path(output_path)
+    out = _resolve(output_path)
     if out.exists() and not overwrite:
         raise FileExistsError(
             f"{out} already exists (pass overwrite=True to replace it)"
@@ -270,6 +308,9 @@ def read_text_file(
     """
     Read and return the text contents of a file.
 
+    Relative `path` resolves under the agent's sandbox directory
+    (~/tars_workspace), not the current working directory.
+
     Args:
         path: Path to the file to read.
         max_chars: Maximum number of characters to return (to avoid huge outputs).
@@ -279,10 +320,10 @@ def read_text_file(
     only the first max_chars characters are returned with a truncation notice.
 
     Example:
-        >>> read_text_file("/tmp/hello.txt")
+        >>> read_text_file("hello.txt")
         'Hello World!'
     """
-    file_path = Path(path)
+    file_path = _resolve(path)
     if not file_path.is_file():
         raise FileNotFoundError(f"No such file: {file_path}")
 

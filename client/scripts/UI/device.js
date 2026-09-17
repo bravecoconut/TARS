@@ -24,5 +24,6 @@ const toolsAndRoles = {
     "compute_file_hash": "Computing file hash",
     "write_text_file": "Writing file",
     "zip_directory": "Archiving directory",
-    "read_text_file": "Reading file"
+    "read_text_file": "Reading file",
+    "set_memory":"Saving in Memory..."
 }
